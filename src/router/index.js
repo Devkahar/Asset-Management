@@ -1,23 +1,29 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
-
+import AuthLayout from "@/layout/AuthLayout.vue";
+import { ROUTE } from "@/utils/helper";
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/HomeView.vue"),
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/login",
+    name: "login",
+    meta: { layout: AuthLayout },
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+      import(/* webpackChunkName: "about" */ "../views/LoginView.vue"),
+  },
+  {
+    path: ROUTE.SIGNUP.path,
+    name: ROUTE.SIGNUP.name,
+    meta: { layout: AuthLayout },
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/SignupView.vue"),
   },
 ];
 
