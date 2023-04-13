@@ -1,9 +1,7 @@
 <template>
   <div class="p-10">
     <!-- Motadata Logo -->
-    <div class="h-10">
-      <img :src="logo" class="h-full" />
-    </div>
+    <Logo />
     <!-- Headline -->
     <div class="mt-5 mb-5">
       <Headline>Motadata Support Portal Signup</Headline>
@@ -11,8 +9,7 @@
     <!-- Login Form -->
     <Form
       :validate="validate"
-      :init="setForm"
-      :success-handler="() => {}"
+      :successHandler="() => {}"
       :loading="false"
       buttonName="SignUp"
     />
@@ -24,56 +21,27 @@
 </template>
 
 <script>
-import logo from "@/assets/logo.avif";
 import Headline from "@/components/Headline.vue";
 import IconsName from "@/utils/iconPath.js";
-import {
-  ROUTE,
-  emailValidate,
-  passwordValidate,
-  passwordConfirmValidate,
-  userNameValidate,
-  Error,
-} from "@/utils/helper";
+import { Error } from "@/utils/helper";
 import Form from "@/components/Form.vue";
 import Link from "@/components/Link.vue";
 import Alert from "@/components/Alert.vue";
+import Logo from "@/components/Logo.vue";
+import { signupValidation } from "@/utils/authValidation";
+import { ROUTE } from "@/utils/constants";
 
 export default {
   name: "LoginVue",
   data() {
     return {
-      logo,
       messageIcon: IconsName.message,
       loginPath: ROUTE.LOGIN.path,
-      validate: [
-        userNameValidate,
-        emailValidate,
-        passwordValidate,
-        passwordConfirmValidate,
-      ],
-      form: null,
+      validate: signupValidation,
       error: null,
     };
   },
-  created() {
-    passwordConfirmValidate.decorator[1].rules = [
-      ...passwordConfirmValidate.decorator[1].rules,
-      { validator: this.confirmPasswordValidate },
-    ];
-  },
   methods: {
-    confirmPasswordValidate(_, value, callback) {
-      const form = this.form;
-      if (value && value !== form.getFieldValue("password")) {
-        callback("Two passwords that you enter is inconsistent!");
-      } else {
-        callback();
-      }
-    },
-    setForm(form) {
-      this.form = form;
-    },
     signupHandler(data) {
       console.log(data);
       if (!data) {
@@ -82,6 +50,6 @@ export default {
     },
   },
 
-  components: { Headline, Form, Link, Alert },
+  components: { Headline, Form, Link, Alert, Logo },
 };
 </script>

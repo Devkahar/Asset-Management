@@ -3,10 +3,15 @@
     type="primary"
     @click="click"
     :loading="loading"
-    block
     :html-type="htmlType"
+    size="large"
+    :shape="shape"
+    :block="block"
   >
-    <slot>Click Me</slot>
+    <div class="flex items-center justify-center">
+      <slot>Click Me</slot>
+      <slot name="tail"></slot>
+    </div>
   </a-button>
 </template>
 
@@ -26,7 +31,15 @@ export default {
     },
     htmlType: {
       type: String,
-      default: "submit",
+      default: "button",
+    },
+    shape: {
+      type: String,
+      default: "default",
+    },
+    block: {
+      type: Boolean,
+      default: false,
     },
   },
 };

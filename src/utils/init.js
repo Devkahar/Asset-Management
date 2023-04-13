@@ -10,6 +10,15 @@ import {
   Form,
   Modal,
   Result,
+  Skeleton,
+  Avatar,
+  Popover,
+  Table,
+  Drawer,
+  Select,
+  DatePicker,
+  message,
+  Pagination,
 } from "ant-design-vue/lib";
 import UUID from "vue-uuid";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -40,6 +49,10 @@ import {
   faImage,
   faEnvelopeOpen,
   faKey,
+  faXmark,
+  faArrowLeft,
+  faPen,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 /* add icons to the library */
 library.add(
@@ -67,9 +80,13 @@ library.add(
   faChartBar,
   faImage,
   faEnvelopeOpen,
-  faKey
+  faKey,
+  faXmark,
+  faArrowLeft,
+  faPen,
+  faTrash
 );
-const registerComponnet = function (Vue) {
+const register = function (Vue) {
   Vue.component(Button.name, Button);
   Vue.component(Spin.name, Spin);
   Vue.component(Input.name, Input);
@@ -85,12 +102,23 @@ const registerComponnet = function (Vue) {
   Vue.component(Form.Item.name, Form.Item);
   Vue.component(Modal.name, Modal);
   Vue.component(Result.name, Result);
-  Vue.use(UUID);
-  Vue.mixin({
-    created() {
-      console.log("[created] " + this.$options.name);
-    },
-  });
+  Vue.component(Skeleton.name, Skeleton);
+  Vue.component(Avatar.name, Avatar);
+  Vue.component(Popover.name, Popover);
+  Vue.component(Table.name, Table);
+  Vue.component(Drawer.name, Drawer);
+  Vue.component(Select.name, Select);
+  Vue.component(Select.Option.name, Select.Option);
+  Vue.component(DatePicker.name, DatePicker);
+  Vue.use(message);
+  Vue.component(Pagination.name, Pagination);
   Vue.component("font-awesome-icon", FontAwesomeIcon);
+
+  Vue.use(UUID);
+  // Vue.mixin({
+  //   created() {
+  //     console.log("[created] " + this.$options.name);
+  //   },
+  // });
 };
-export default registerComponnet;
+export default register;

@@ -1,6 +1,6 @@
 <template>
   <a-form :form="form" @submit="handleSubmit">
-    <div class="mb-5" v-for="field in validate" v-bind:key="field.id">
+    <div class="mb-5" v-for="field in formInputs" v-bind:key="field.id">
       <a-form-item>
         <a-input
           :placeholder="field.placeholder"
@@ -13,7 +13,9 @@
         </a-input>
       </a-form-item>
     </div>
-    <Button :click="handleSubmit" :loading="loading"> {{ buttonName }} </Button>
+    <Button :click="handleSubmit" :loading="loading" :block="true">
+      {{ buttonName }}
+    </Button>
   </a-form>
 </template>
 
@@ -23,12 +25,17 @@ import Icon from "./Icon.vue";
 
 export default {
   name: "FormComponent",
+  data() {
+    return {
+      formFields: [],
+    };
+  },
   components: { Button, Icon },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "register" });
   },
   created() {
-    this.init(this.form);
+    this.formInputs = this.validate.call(this.form);
   },
   methods: {
     handleSubmit(e) {
@@ -45,16 +52,12 @@ export default {
   },
   props: {
     validate: {
-      type: Array,
+      type: Function,
       required: true,
     },
     buttonName: {
       type: String,
       default: "Submit",
-    },
-    init: {
-      type: Function,
-      default: () => {},
     },
     successHandler: {
       type: Function,

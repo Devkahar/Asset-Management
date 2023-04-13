@@ -1,5 +1,7 @@
 <template>
-  <font-awesome-icon :icon="icon" />
+  <div :class="[padded ? 'p-2' : '']">
+    <font-awesome-icon :icon="icon" />
+  </div>
 </template>
 
 <script>
@@ -9,6 +11,10 @@ export default {
     icon: {
       required: true,
       type: String,
+    },
+    padded: {
+      type: Boolean,
+      default: false,
     },
   },
 };

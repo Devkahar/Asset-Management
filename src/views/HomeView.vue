@@ -1,9 +1,12 @@
 <template>
-  <div class="mt-8">Hello</div>
+  <HomeComponent />
 </template>
 
 <script>
+import HomeComponent from "@/components/HomeComponent.vue";
+
 export default {
   name: "HomeView",
+  components: { HomeComponent },
 };
 </script>

@@ -9,8 +9,36 @@
 html {
   font-family: "Poppins";
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .root,
 #root,
 #docs-root {
   --primary-color: #099dd9;
+}
+.ant-popover-arrow {
+  display: none !important;
+}
+.ant-popover-inner {
+  border-radius: 0.9rem !important;
+
+  border-bottom: 0.4rem solid #099dd9;
+}
+.ant-avatar {
+  background-color: #099dd9;
+}
+.ant-drawer-content-wrapper {
+  width: 50vw !important;
+  border-radius: 10rem;
+  padding: 1rem 0;
+}
+.ant-drawer-content {
+  border-radius: 1rem 0rem 0rem 1rem;
+  border-left: 0.4rem solid #099dd9 !important;
+}
+.ant-drawer-body {
+  height: 100%;
 }

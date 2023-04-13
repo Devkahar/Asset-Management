@@ -1,9 +1,7 @@
 <template>
   <div class="p-10">
     <!-- Motadata Logo -->
-    <div class="h-10">
-      <img :src="logo" class="h-full" />
-    </div>
+    <Logo />
     <!-- Headline -->
     <div class="mt-5 mb-5">
       <HeadlineComponent> Motadata Support Portal Login</HeadlineComponent>
@@ -23,21 +21,22 @@
 </template>
 
 <script>
-import logo from "@/assets/logo.avif";
 import HeadlineComponent from "@/components/Headline.vue";
 import IconsName from "@/utils/iconPath.js";
-import { ROUTE, emailValidate, passwordValidate, Error } from "@/utils/helper";
+import { Error } from "@/utils/helper";
 import Form from "@/components/Form.vue";
 import Link from "@/components/Link.vue";
+import Logo from "@/components/Logo.vue";
+import { loginValidation } from "@/utils/authValidation";
+import { ROUTE } from "@/utils/constants";
 
 export default {
   name: "LoginVue",
   data: function () {
     return {
-      logo,
       messageIcon: IconsName.message,
       signupPath: ROUTE.SIGNUP.path,
-      validate: [emailValidate, passwordValidate],
+      validate: loginValidation,
       error: null,
     };
   },
@@ -49,6 +48,6 @@ export default {
       }
     },
   },
-  components: { HeadlineComponent, Form, Link },
+  components: { HeadlineComponent, Form, Link, Logo },
 };
 </script>
