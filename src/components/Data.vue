@@ -116,11 +116,15 @@ import Button from "./Button.vue";
 import Icon from "./Icon.vue";
 import FetchLayout from "./FetchLayout.vue";
 import { actions } from "@/utils/form/formAction";
-import { mainFieldName } from "@/utils/helper";
+import {
+  mainFieldName,
+  getFieldValuesFromApi,
+  convertToArray,
+} from "@/utils/helper";
 import { formField } from "@/store/storeActions";
 import { message } from "ant-design-vue/lib";
 import { forms } from "@/utils/form/formName";
-import { schedulerFiled } from "@/utils/form/scheduler";
+import { schedulerFiled, schedulerFiledName } from "@/utils/form/scheduler";
 export default {
   name: "DataComponent",
   inject: ["changeForm", "id"],
@@ -166,14 +170,33 @@ export default {
       option = {}
     ) {
       if (action.placeholder === actions.schedule.placeholder) {
-        this.changeForm(
-          forms.SCHEDULE,
-          schedulerFiled,
-          actions.add,
-          {},
-          "url",
-          null
-        );
+        try {
+          const res = await getClient(`networkScan/${option.id}/addScheduler`);
+
+          const data = getFieldValuesFromApi(
+            [res.data],
+            schedulerFiled,
+            convertToArray(schedulerFiledName)
+          );
+          this.changeForm(
+            forms.SCHEDULE,
+            data[0].fieldData,
+            actions.edit,
+            { payload: data[0].payload },
+            `networkScan/${option.id}/addScheduler`,
+            () => {}
+          );
+        } catch (error) {
+          console.log("Scheduler Error", error);
+          this.changeForm(
+            forms.SCHEDULE,
+            schedulerFiled,
+            actions.add,
+            {},
+            `networkScan/${option.id}/addScheduler`,
+            () => {}
+          );
+        }
         return;
       }
       if (action.placeholder === actions.search.placeholder) {

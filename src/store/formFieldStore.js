@@ -2,12 +2,16 @@ import { getClient } from "@/utils/client";
 import { credentialFieldName } from "@/utils/form/credential";
 import { subFieldsName } from "@/utils/form/formName";
 import { networkDiscoveryFieldNames } from "@/utils/form/networkScan";
-import { mainField, mainFieldName } from "@/utils/helper";
-import { ipRangeOptions } from "@/utils/options";
+import {
+  getFieldValuesFromApi,
+  mainField,
+  mainFieldName,
+} from "@/utils/helper";
 import { formField } from "@/store/storeActions";
 const convertToArray = (obj) => {
   return Object.entries(obj).map((el) => el[1]);
 };
+
 const formFieldStore = {
   state: () => ({
     data: [],
@@ -81,67 +85,12 @@ const formFieldStore = {
         commit(formField.mutations.fieldLoading, { loading: false });
         const resData = res.data;
         console.log("Store Fetch", resData);
-        const data = resData.map((el) => {
-          let dataItem = JSON.parse(
-            JSON.stringify(this.getters.field.fieldData)
-          );
-          for (let i in this.getters.field.fieldName) {
-            const key = this.getters.field.fieldName[i];
-            console.log(key);
-            if (dataItem[key]) {
-              if (dataItem[key].type === "date") {
-                console.log("Date", el[key]);
-              }
-              if (Array.isArray(el[key])) {
-                dataItem[key].display = false;
-                let arrItems = [];
-                el[key].map((item) => {
-                  if (item.length !== null) {
-                    arrItems.push(item);
-                  }
-                });
-                dataItem[key].initialValue = arrItems;
-              } else {
-                dataItem[key].display = true;
-                dataItem[key].initialValue = el[key];
-              }
-              if (key === networkDiscoveryFieldNames.ipRangeType) {
-                dataItem[key].edit = false;
-                if (el[key] === ipRangeOptions[0].id) {
-                  dataItem[networkDiscoveryFieldNames.credentials].edit = false;
-                } else
-                  dataItem[networkDiscoveryFieldNames.credentials].edit = true;
-              } else if (key != networkDiscoveryFieldNames.credentials) {
-                dataItem[key].edit = true;
-              }
-              state.hideFields.map((el) => {
-                console.log(el);
-                if (key === el) {
-                  dataItem[key].display = false;
-                }
-              });
-              console.log("Data Item", dataItem[key]);
-            }
-          }
-          const payload = {};
-          Object.entries(el)
-            .filter((el) => {
-              const key = el[0];
-              for (let i in this.getters.field.fieldName) {
-                let key2 = this.getters.field.fieldName[i];
-                if (key == key2) return false;
-              }
-              return true;
-            })
-            .map((el) => {
-              payload[el[0]] = el[1];
-            });
-          console.log(payload);
-          return {
-            fieldData: dataItem,
-            payload,
-          };
-        });
+        const data = getFieldValuesFromApi(
+          resData,
+          this.getters.field.fieldData,
+          this.getters.field.fieldName,
+          state.hideFields
+        );
         console.log(data);
         commit(formField.mutations.setFieldData, { data });
       } catch (error) {

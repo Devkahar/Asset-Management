@@ -10,7 +10,7 @@
     <Form
       :validate="validate"
       :success-handler="loginHandler"
-      :loading="false"
+      :loading="loading"
       buttonName="LogIn"
     />
     <p class="mt-5 text-right">

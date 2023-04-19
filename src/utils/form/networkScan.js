@@ -1,11 +1,11 @@
 import { capitalize, generateValidation } from "../generalFields";
-import { ipRangeOptions, scanTypeOptions } from "../options";
+import { ipRangeOptions } from "../options";
 import { ipAddressRules, requiredRule } from "../rules";
 // Processor
 export const networkDiscoveryFieldNames = {
   name: "name",
   ipRangeType: "ipRangeType",
-  discoveryScan: "scanType",
+  // discoveryScan: "scanType",
   ipRangeStart: "ipRangeStart",
   ipList: "ipList",
   credentials: "refIds",
@@ -29,13 +29,13 @@ export const networkDiscoveryFields = {
     options: ipRangeOptions,
     rules: [...requiredRule],
   },
-  [networkDiscoveryFieldNames.discoveryScan]: {
-    placeholder: "Discovery Scan",
-    initialValue: "NOT_SCHEDULED",
-    type: "option",
-    options: scanTypeOptions,
-    rules: [...requiredRule],
-  },
+  // [networkDiscoveryFieldNames.discoveryScan]: {
+  //   placeholder: "Discovery Scan",
+  //   initialValue: "NOT_SCHEDULED",
+  //   type: "option",
+  //   options: scanTypeOptions,
+  //   rules: [...requiredRule],
+  // },
   [networkDiscoveryFieldNames.credentials]: {
     placeholder: "Credentials",
     initialValue: [],

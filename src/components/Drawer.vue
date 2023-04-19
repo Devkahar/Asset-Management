@@ -109,8 +109,8 @@ export default {
       try {
         this.loading = true;
         const body = {
-          ...data,
           ...this.payload.payload,
+          ...data,
         };
         console.log("Body ", body);
         let res;

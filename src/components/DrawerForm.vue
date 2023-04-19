@@ -49,7 +49,7 @@
             :placeholder="field.placeholder"
             v-decorator="field.decorator"
             format="HH"
-            valueFormat="x"
+            valueFormat="HH"
           />
           <a-select
             :placeholder="field.placeholder"
@@ -113,7 +113,7 @@ export default {
       hideCredential: false,
       actions: actions,
       removeFields: [],
-      initDeleteField: ["ipRangeType", "scheduleType"],
+      initDeleteField: ["ipRangeType", "scanType"],
     };
   },
   computed: {
@@ -157,6 +157,7 @@ export default {
       this.fetchCredentials();
     }
     this.initDeleteField.map((key) => {
+      console.log("Initial Value", this.newFileds, key);
       if (this.newFileds[key]?.initialValue) {
         this.removeFields = removeFieldNames[this.newFileds[key].initialValue];
         this.formInputs = this.generateFields();
@@ -229,7 +230,7 @@ export default {
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           console.log("Form Values ", values);
-          if (values[networkDiscoveryFieldNames.ipList]) {
+          if (typeof values[networkDiscoveryFieldNames.ipList] === "string") {
             values[networkDiscoveryFieldNames.ipList] =
               values[networkDiscoveryFieldNames.ipList].split(",");
           }
@@ -244,6 +245,9 @@ export default {
             }
             if (this.newFileds[key].suffix === "Frequency") {
               values[key] = convertToHz(values[key], fields[key].suffix);
+            }
+            if (this.newFileds[key].type === "time") {
+              values[key] = Number.parseInt(values[key]) * 3600000;
             }
           });
           this.successHandler(values);
@@ -289,7 +293,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .ant-input {
   padding-right: 2.5rem;
 }

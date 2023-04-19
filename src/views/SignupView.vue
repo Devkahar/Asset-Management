@@ -10,7 +10,7 @@
     <Form
       :validate="validate"
       :successHandler="signupHandler"
-      :loading="false"
+      :loading="loading"
       buttonName="SignUp"
     />
     <p class="mt-5 text-right">
@@ -49,7 +49,7 @@ export default {
       try {
         console.log(body);
         this.error = null;
-        this.loading = false;
+        this.loading = true;
         delete body["confirmPassword"];
         const res = await postClient("register", body);
         this.loading = false;

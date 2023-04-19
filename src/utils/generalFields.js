@@ -29,6 +29,9 @@ export const createField = (
   if (type === "date") {
     if (initialValue) initialValue = initialValue.toString();
   }
+  if (type === "time") {
+    if (!initialValue) initialValue = "";
+  }
   let newFiled = cloneDeep({
     id: generateKey(),
     placeholder: placeholder,

@@ -5,8 +5,8 @@ import { monthOption, schedulerOption, weekOptions } from "../options";
 import { requiredRule } from "../rules";
 
 export const schedulerFiledName = {
-  scheduleType: "scheduleType",
-  startAt: "startAt",
+  scheduleType: "scanType",
+  startAt: "startTime",
   day: "day",
   time: "time",
   month: "month",
@@ -56,8 +56,9 @@ export const schedulerFiled = {
   [schedulerFiledName.month]: {
     placeholder: capitalize(schedulerFiledName.month),
     initialValue: "APRIL",
-    type: monthOption,
+    options: monthOption,
     rules: [...requiredRule],
+    type: "option",
   },
 };
 
