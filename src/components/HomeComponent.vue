@@ -2,7 +2,7 @@
   <div>
     <PageTitle :size="2"> Hardware Asset </PageTitle>
     <FetchLayout :loading="false" :error="null">
-      <TableComponent />
+      <DisplayAssets />
     </FetchLayout>
   </div>
 </template>
@@ -10,10 +10,10 @@
 <script>
 import FetchLayout from "@/components/FetchLayout.vue";
 import PageTitle from "./PageTitle.vue";
-import TableComponent from "./TableComponent.vue";
+import DisplayAssets from "./DisplayAssets.vue";
 
 export default {
   name: "HomeComponent",
-  components: { FetchLayout, PageTitle, TableComponent },
+  components: { FetchLayout, PageTitle, DisplayAssets },
 };
 </script>

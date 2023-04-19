@@ -1,7 +1,7 @@
 <template>
   <FetchLayout :loading="loading" :error="error">
-    <div class="">
-      <div class="">
+    <div v-if="error === null && !loading">
+      <div>
         <PageTitle :size="2">
           <template #head>
             <PageBack />
@@ -62,27 +62,7 @@ export default {
     },
   },
   inject: ["id"],
-  methods: {
-    // async fetchAssetDetail() {
-    //   try {
-    //     const res = await getClient(`asset/${this.id}`);
-    //     console.log("Asset View Res", res);
-    //     const resData = res.data;
-    //     console.log(resData);
-    //     this.loading = false;
-    //     let dataItem = JSON.parse(JSON.stringify(assetField));
-    //     for (let key in assetFieldName) {
-    //       dataItem[key].initialValue = resData[key];
-    //     }
-    //     this.assetItems = dataItem;
-    //     console.log(this.assetItems);
-    //   } catch (error) {
-    //     console.log(error);
-    //     this.error = Error(error);
-    //     this.loading = false;
-    //   }
-    // },
-  },
+  methods: {},
   components: {
     PageTitle,
     AssetItem,

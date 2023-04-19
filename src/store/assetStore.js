@@ -36,7 +36,7 @@ const assetStore = {
         console.log(dataItem);
       } catch (error) {
         console.log(error);
-        commit("setError", { error: Error(error) });
+        commit("setError", { error: Error("Resource Does'nt Exist") });
         commit("setLoading", { loading: false });
       }
     },

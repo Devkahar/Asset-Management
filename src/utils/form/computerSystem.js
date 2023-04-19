@@ -1,45 +1,45 @@
 import { capitalize, generateValidation } from "../generalFields";
-import { descriptionFiled, manufacturerField } from "./commonField";
+import { manufacturerField } from "./commonField";
 
 // Computer System
 export const computerSystemFieldName = {
-  name: "name",
-  domainName: "domainName",
+  // name: "name",
+  // domainName: "domainName",
   manufacturer: "manufacturer",
   modelName: "modelName",
   systemType: "systemType",
-  PCSystemType: "pcSystemType",
+  // PCSystemType: "pcSystemType",
   UUID: "uuid",
   bootUpState: "bootUpState",
-  numberOfLogicalProcessors: "numberOfLogicalProcessors",
+  numberOfLogicalProcessors: "numberOfLogicalProcessor",
   numberOfProcessors: "numberOfProcessors",
-  deviceStatus: "deviceStatus",
-  partOfDomain: "partOfDomain",
+  // deviceStatus: "deviceStatus",
+  // partOfDomain: "partOfDomain",
   userName: "userName",
-  description: "description",
+  // description: "description",
 };
 export const computerSystemField = {
-  [computerSystemFieldName.name]: {
-    placeholder: capitalize(computerSystemFieldName.name),
-    initialValue: "",
-  },
-  [computerSystemFieldName.domainName]: {
-    placeholder: capitalize(computerSystemFieldName.domainName),
-    initialValue: "",
-  },
+  // [computerSystemFieldName.name]: {
+  //   placeholder: capitalize(computerSystemFieldName.name),
+  //   initialValue: "",
+  // },
+  // [computerSystemFieldName.domainName]: {
+  //   placeholder: capitalize(computerSystemFieldName.domainName),
+  //   initialValue: "",
+  // },
   [computerSystemFieldName.manufacturer]: manufacturerField,
   [computerSystemFieldName.modelName]: {
     placeholder: capitalize(computerSystemFieldName.modelName),
     initialValue: "",
   },
-  [computerSystemFieldName.systemType]: {
-    placeholder: capitalize(computerSystemFieldName.systemType),
-    initialValue: "",
-  },
-  [computerSystemFieldName.PCSystemType]: {
-    placeholder: capitalize(computerSystemFieldName.PCSystemType),
-    initialValue: "",
-  },
+  // [computerSystemFieldName.systemType]: {
+  //   placeholder: capitalize(computerSystemFieldName.systemType),
+  //   initialValue: "",
+  // },
+  // [computerSystemFieldName.PCSystemType]: {
+  //   placeholder: capitalize(computerSystemFieldName.PCSystemType),
+  //   initialValue: "",
+  // },
   [computerSystemFieldName.UUID]: {
     placeholder: capitalize(computerSystemFieldName.UUID),
     initialValue: "",
@@ -58,19 +58,19 @@ export const computerSystemField = {
     initialValue: "",
     type: "number",
   },
-  [computerSystemFieldName.deviceStatus]: {
-    placeholder: capitalize(computerSystemFieldName.deviceStatus),
-    initialValue: "",
-  },
-  [computerSystemFieldName.partOfDomain]: {
-    placeholder: capitalize(computerSystemFieldName.partOfDomain),
-    initialValue: "",
-  },
+  // [computerSystemFieldName.deviceStatus]: {
+  //   placeholder: capitalize(computerSystemFieldName.deviceStatus),
+  //   initialValue: "",
+  // },
+  // [computerSystemFieldName.partOfDomain]: {
+  //   placeholder: capitalize(computerSystemFieldName.partOfDomain),
+  //   initialValue: "",
+  // },
   [computerSystemFieldName.userName]: {
     placeholder: capitalize(computerSystemFieldName.userName),
     initialValue: "",
   },
-  [computerSystemFieldName.description]: descriptionFiled,
+  // [computerSystemFieldName.description]: descriptionFiled,
 };
 export const computerSystemValidation = function (
   newFields = computerSystemField

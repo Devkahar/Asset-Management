@@ -1,4 +1,4 @@
-import { createField } from "./helper";
+import { createField } from "./generalFields";
 import Icons from "./iconPath";
 import { emailRules, passwordRules, userNameRule } from "./rules";
 
@@ -11,13 +11,25 @@ export const loginValidation = function () {
 
 export const signupValidation = function () {
   return [
-    createField("userName", "User Name", userNameRule, null, Icons.message),
+    createField("name", "User Name", userNameRule, null, Icons.user),
     createField("email", "Email", emailRules, "email", Icons.message),
     createField("password", "Password", passwordRules, "password", Icons.key),
     createField(
       "confirmPassword",
       "Conform Password",
-      [...passwordRules],
+      [
+        ...passwordRules,
+        {
+          validator: (rule, value, callback) => {
+            console.log(this.getFieldValue("password"), value);
+            if (value && value !== this.getFieldValue("password")) {
+              callback("Password does'nt match with provious one.");
+            } else {
+              callback();
+            }
+          },
+        },
+      ],
       "password",
       Icons.key
     ),

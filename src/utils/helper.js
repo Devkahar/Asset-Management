@@ -36,6 +36,13 @@ import {
   networkAdapterFieldName,
 } from "./form/networkAdapter";
 import { credentialField, credentialFieldName } from "./form/credential";
+import {
+  networkDiscoveryFieldNames,
+  networkDiscoveryFields,
+  networkDiscoveryRemoveFields,
+} from "./form/networkScan";
+import convert from "convert-units";
+import { schedulerRemoveFields } from "./form/scheduler";
 
 export class Error {
   title = "";
@@ -233,7 +240,7 @@ export const getAssetFileds = {
     fieldName: computerSystemFieldName,
     actions: { edit: actions.edit, delete: actions.delete },
     formName: forms.COMPUTER_SYSTEM,
-    url: "computerSystem",
+    url: "computersystem",
   },
   [subFieldsName.os]: {
     fieldData: osField,
@@ -273,7 +280,7 @@ export const getAssetFileds = {
   [subFieldsName.physicalDisk]: {
     fieldData: physicalDiskField,
     fieldName: physicalDiskFieldName,
-    actions: { add: actions.add, edit: actions.edit, delete: actions.delete },
+    actions: { edit: actions.edit, delete: actions.delete },
     formName: forms.PHYSICAL_DISK,
     url: "physicalDisk",
   },
@@ -282,7 +289,7 @@ export const getAssetFileds = {
     fieldName: logicalDiskFieldName,
     actions: { add: actions.add, edit: actions.edit, delete: actions.delete },
     formName: forms.LOGICAL_DISK,
-    url: "logicalDisk",
+    url: "logicaldisk",
   },
   [subFieldsName.monitor]: {
     fieldData: monitorField,
@@ -294,9 +301,9 @@ export const getAssetFileds = {
   [subFieldsName.keyboard]: {
     fieldData: keyboardField,
     fieldName: keyboardFieldName,
-    actions: { edit: actions.edit, delete: actions.delete },
+    actions: { add: actions.add, edit: actions.edit, delete: actions.delete },
     formName: forms.KEYBOARD,
-    url: "keyBoard",
+    url: "keyboard",
   },
   [subFieldsName.pointingDevice]: {
     fieldData: pointingDeviceField,
@@ -329,19 +336,143 @@ export const assetDiscoveryField = {
   },
 };
 
-export const getAssetDiscoveryField = {
+export const getAssetDiscoveryFields = {
   [assetDiscoveryFieldsName.credentials]: {
     fieldData: { ...credentialField },
     fieldName: credentialFieldName,
-    actions: { edit: actions.update, delete: actions.delete },
+    actions: { edit: actions.edit, delete: actions.delete },
     formName: forms.ADD_CREDENTIAL,
     url: "credentials",
   },
-  [assetDiscoveryFieldsName.credentials]: {
-    fieldData: { ...credentialField },
-    fieldName: credentialFieldName,
-    actions: { edit: actions.update },
+  [assetDiscoveryFieldsName.networkScan]: {
+    fieldData: networkDiscoveryFields,
+    fieldName: networkDiscoveryFieldNames,
+    actions: {
+      add: actions.add,
+      search: { ...actions.search, url: "/scan" },
+      edit: actions.edit,
+      delete: actions.delete,
+      schedule: actions.schedule,
+    },
     formName: forms.NETWORK_SCAN,
-    url: "credentials",
+    url: "networkScan",
   },
+};
+
+export const convertToArray = (obj) => {
+  return Object.entries(obj).map((el) => el[1]);
+};
+
+export const mainFieldName = {
+  getAssetFileds: "getAssetFileds",
+  getAssetDiscoveryFields: "getAssetDiscoveryFields",
+};
+export const mainField = {
+  [mainFieldName.getAssetFileds]: getAssetFileds,
+  [mainFieldName.getAssetDiscoveryFields]: getAssetDiscoveryFields,
+};
+
+export const resetFields = (data) => {
+  for (let i in data) {
+    if (Array.isArray(data[i].initialValue)) {
+      data[i].initialValue = [];
+    } else {
+      data[i].initialValue = "";
+    }
+  }
+  return data;
+};
+
+export const getFrequencyUnit = (value) => {
+  let count = 0;
+  let unit = "Hz";
+  value = parseFloat(value);
+  while (value > 0) {
+    value /= 10;
+    count++;
+  }
+  if (count >= 3) {
+    unit = "kHz";
+  }
+  if (count >= 6) {
+    unit = "MHz";
+  }
+  if (count >= 9) {
+    unit = "GHz";
+  }
+  return unit;
+};
+
+export const getSizeUnit = (value) => {
+  let count = 0;
+  let unit = "b";
+  value = parseInt(value);
+  console.log(value);
+  while (value > 1) {
+    value /= 1024;
+    count++;
+  }
+  if (count >= 2) {
+    unit = "KB";
+  }
+  if (count >= 3) {
+    unit = "MB";
+  }
+  if (count >= 4) {
+    unit = "GB";
+  }
+  console.log(unit, count);
+  return unit;
+};
+
+export const getByteString = (value) => {
+  if (!value) return "0 B";
+  const unit = getSizeUnit(value);
+  return convert(value).from("B").to(unit).toFixed(2).toString() + " " + unit;
+};
+
+export const getFrequencyString = (value) => {
+  if (!value) return "0 Hz";
+  const unit = getFrequencyUnit(value);
+  return convert(value).from("Hz").to(unit).toFixed(2).toString() + " " + unit;
+};
+
+export const getDateString = (value) => {
+  let date = new Date(value);
+  if (!date) return null;
+  date = date.toString().split(" ").splice(0, 5);
+  let [hour, min] = date[4]
+    .split(":")
+    .slice(0, 2)
+    .map((el) => Number.parseInt(el));
+  if (hour === 0 && min === 0) {
+    date.pop();
+  } else {
+    if (hour > 12) {
+      date[4] = hour - 12 + ":" + min + " PM";
+    } else {
+      date[4] = hour + ":" + min + " AM";
+    }
+  }
+  date[0] += ",";
+  date[2] += ",";
+  console.log(date);
+  date = date.join(" ");
+  return date;
+};
+
+export const convertToBytes = (value, unit) => {
+  value = Number.parseFloat(value);
+  let newValue = convert(value).from(unit).to("B");
+  console.log("Bytes Conversion ", value, unit, newValue);
+  return newValue;
+};
+
+export const convertToHz = (value, unit) => {
+  return convert(value).from(unit).to("Hz");
+};
+
+export const removeFieldNames = {
+  ...networkDiscoveryRemoveFields,
+  ...schedulerRemoveFields,
 };

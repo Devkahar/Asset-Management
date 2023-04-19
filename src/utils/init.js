@@ -19,6 +19,8 @@ import {
   DatePicker,
   message,
   Pagination,
+  Radio,
+  TimePicker,
 } from "ant-design-vue/lib";
 import UUID from "vue-uuid";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -53,7 +55,11 @@ import {
   faArrowLeft,
   faPen,
   faTrash,
+  faSearch,
+  faCalendarDays,
 } from "@fortawesome/free-solid-svg-icons";
+import VueLodash from "vue-lodash";
+import { lodash } from "lodash";
 /* add icons to the library */
 library.add(
   faTwitter,
@@ -84,7 +90,9 @@ library.add(
   faXmark,
   faArrowLeft,
   faPen,
-  faTrash
+  faTrash,
+  faSearch,
+  faCalendarDays
 );
 const register = function (Vue) {
   Vue.component(Button.name, Button);
@@ -110,10 +118,13 @@ const register = function (Vue) {
   Vue.component(Select.name, Select);
   Vue.component(Select.Option.name, Select.Option);
   Vue.component(DatePicker.name, DatePicker);
+  Vue.component(TimePicker.name, TimePicker);
   Vue.use(message);
   Vue.component(Pagination.name, Pagination);
+  Vue.component(Radio.Group.name, Radio.Group);
+  Vue.component(Radio.name, Radio);
   Vue.component("font-awesome-icon", FontAwesomeIcon);
-
+  Vue.use(VueLodash, { name: "lodash", lodash: lodash });
   Vue.use(UUID);
   // Vue.mixin({
   //   created() {

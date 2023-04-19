@@ -15,6 +15,7 @@ export const forms = {
   KEYBOARD: "KEYBOARD",
   POINTING_DEVICE: "POINTING_DEVICE",
   NETWORK_SCAN: "NETWORK_SCAN",
+  SCHEDULE: "SCHEDULE",
 };
 export const assetFieldsName = {
   properties: "properties",

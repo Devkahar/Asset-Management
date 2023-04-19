@@ -5,21 +5,36 @@
     :tabPosition="'left'"
   >
     <a-tab-pane v-for="items in list" v-bind:key="items.key" :tab="items.title">
-      {{ items.key }}
+      <Data
+        v-if="getTab === items.key"
+        :tab="getTab"
+        :parentFieldName="getParent"
+        :key="items.key"
+      />
     </a-tab-pane>
   </a-tabs>
 </template>
 
 <script>
 // import Data from "@/components/Data.vue";
-import { assetDiscoveryField } from "@/utils/helper";
+import Data from "@/components/Data.vue";
+import { assetDiscoveryField, mainFieldName } from "@/utils/helper";
 export default {
   name: "AssetdiscoveryView",
   data() {
     return {
       list: this.getArray(assetDiscoveryField),
-      currentTab: assetDiscoveryField.credentials,
+      currentTab: assetDiscoveryField.credentials.key,
+      parentFieldName: mainFieldName.getAssetDiscoveryFields,
     };
+  },
+  computed: {
+    getTab() {
+      return this.currentTab;
+    },
+    getParent() {
+      return this.parentFieldName;
+    },
   },
   methods: {
     getArray(obj) {
@@ -30,6 +45,6 @@ export default {
       this.currentTab = key;
     },
   },
-  components: {},
+  components: { Data },
 };
 </script>

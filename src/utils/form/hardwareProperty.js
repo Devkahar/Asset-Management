@@ -4,8 +4,8 @@ import { dateField } from "./commonField";
 // Hardware Property Form
 export const hardWarePropertyFieldName = {
   serialNumber: "serialNumber",
-  warrantyExpirationDate: "warrantyExpirationDate",
-  auditDate: "auditDate",
+  // warrantyExpirationDate: "warrantyExpirationDate",
+  // auditDate: "auditDate",
 };
 
 export const hardWarePropertyField = {

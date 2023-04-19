@@ -37,6 +37,19 @@ export const passwordRules = [
       "Password Should Contain 1 lowercase, 1 uppercase and special character",
   },
 ];
+
+export const confirmPasswordRules = [
+  {
+    validator: (rule, value, callback) => {
+      console.log(this.getFieldValue("password"), value);
+      if (value && value !== this.getFieldValue("password")) {
+        callback("Password does'nt match with provious one.");
+      } else {
+        callback();
+      }
+    },
+  },
+];
 export const requiredRule = [
   {
     required: true,

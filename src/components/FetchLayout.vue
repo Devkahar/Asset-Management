@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <Skeleton v-if="loading" />
-    <Alert v-else-if="error" :error="error" />
+    <a-result v-else-if="error" status="404" :title="error.message"> </a-result>
     <div v-else>
       <slot></slot>
     </div>
@@ -10,7 +10,7 @@
 
 <script>
 import { Error } from "@/utils/helper";
-import Alert from "./Alert.vue";
+// import Alert from "./Alert.vue";
 import Skeleton from "./Skeleton.vue";
 
 export default {
@@ -25,6 +25,6 @@ export default {
       required: true,
     },
   },
-  components: { Skeleton, Alert },
+  components: { Skeleton },
 };
 </script>

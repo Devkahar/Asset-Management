@@ -1,11 +1,15 @@
 import { generateValidation } from "../generalFields";
-import { ipAddressRules, passwordRules, requiredRule } from "../rules";
+import { credentialOptions } from "../options";
+import { requiredRule } from "../rules";
+import { descriptionFiled } from "./commonField";
 
 // Credential Form
 export const credentialFieldName = {
-  name: "name",
+  name: "username",
   password: "password",
-  ipAddress: "ipAddress",
+  // ipAddress: "ipAddress",
+  credentialType: "credentialType",
+  description: "description",
 };
 export const credentialField = {
   [credentialFieldName.name]: {
@@ -19,12 +23,14 @@ export const credentialField = {
     rules: [...requiredRule],
     type: "password",
   },
-  [credentialFieldName.ipAddress]: {
-    placeholder: "Ip Address(e.g 192.168.8.8)",
-    initialValue: "",
-    passwordRules,
-    rules: [...requiredRule, ...ipAddressRules],
+  [credentialFieldName.credentialType]: {
+    placeholder: "Connection Type",
+    initialValue: credentialOptions[0].value,
+    rules: [...requiredRule],
+    type: "radio",
+    options: credentialOptions,
   },
+  [credentialFieldName.description]: descriptionFiled,
 };
 export const credentialValidation = function (newFields = credentialField) {
   return generateValidation(newFields);

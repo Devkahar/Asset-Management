@@ -21,3 +21,12 @@ export const ROUTE = {
     name: "assetDiscoveryPage",
   },
 };
+
+export const clientAction = {
+  getClient: "getClient",
+  postClient: "postClient",
+  patchClient: "patchClient",
+  deleteClient: "deleteClient",
+  putClient: "putClient",
+  schedulerClient: "schedulerClient",
+};

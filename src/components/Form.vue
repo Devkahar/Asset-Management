@@ -1,7 +1,18 @@
 <template>
   <a-form :form="form" @submit="handleSubmit">
     <div class="mb-5" v-for="field in formInputs" v-bind:key="field.id">
-      <a-form-item>
+      <a-form-item v-if="field.type === 'password'">
+        <a-input-password
+          :placeholder="field.placeholder"
+          :type="field.type"
+          v-decorator="field.decorator"
+        >
+          <template #prefix>
+            <Icon :icon="field.icon" />
+          </template>
+        </a-input-password>
+      </a-form-item>
+      <a-form-item v-else>
         <a-input
           :placeholder="field.placeholder"
           :type="field.type"
@@ -27,7 +38,7 @@ export default {
   name: "FormComponent",
   data() {
     return {
-      formFields: [],
+      formInputs: [],
     };
   },
   components: { Button, Icon },
@@ -36,6 +47,7 @@ export default {
   },
   created() {
     this.formInputs = this.validate.call(this.form);
+    console.log("Form Inputs ", this.formInputs, this.validate);
   },
   methods: {
     handleSubmit(e) {

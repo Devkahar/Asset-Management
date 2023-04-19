@@ -8,5 +8,7 @@ const Icons = {
   delete: "fas fa-trash",
   edit: "fas fa-pen",
   check: "fas fa-check",
+  search: "fas fa-search",
+  calender: "fas fa-calendar-days",
 };
 export default Icons;

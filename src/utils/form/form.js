@@ -9,10 +9,12 @@ import { logicalDiskValidation } from "./logicalDisk";
 import { monitorValidation } from "./monitor";
 import { motherboardValidation } from "./motherboard";
 import { networkAdapterValidation } from "./networkAdapter";
+import { networkDiscoveryValidation } from "./networkScan";
 import { osValidation } from "./os";
 import { physicalDiskValidation } from "./physicalDisk";
 import { processorValidation } from "./processor";
 import { ramValidation } from "./ram";
+import { schedulerValidation } from "./scheduler";
 
 export const appForms = {
   [forms.ADD_CREDENTIAL]: {
@@ -72,7 +74,15 @@ export const appForms = {
     validation: keyboardValidation,
   },
   [forms.POINTING_DEVICE]: {
-    title: "POINTING_DEVICE",
+    title: "POINTING DEVICE",
     validation: keyboardValidation,
+  },
+  [forms.NETWORK_SCAN]: {
+    title: "NETWORK SCAN",
+    validation: networkDiscoveryValidation,
+  },
+  [forms.SCHEDULE]: {
+    title: "SCHEDULE",
+    validation: schedulerValidation,
   },
 };

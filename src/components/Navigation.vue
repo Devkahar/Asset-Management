@@ -4,6 +4,10 @@
       <Logo />
     </div>
     <div class="flex">
+      <!-- Asset Discovery Link -->
+      <div class="mr-3 flex items-center">
+        <Link :path="assetDiscoveryLink"> Asset Discovery </Link>
+      </div>
       <!-- Create Button -->
       <div class="mr-3">
         <Button shape="round" :click="addCredential"
@@ -13,7 +17,7 @@
       </div>
       <!-- Profile Icon -->
       <UserPopover>
-        <Avatar>D</Avatar>
+        <Avatar>{{ name }}</Avatar>
       </UserPopover>
     </div>
   </div>
@@ -29,12 +33,17 @@ import UserPopover from "./UserPopover.vue";
 import { forms } from "@/utils/form/formName";
 import { credentialField } from "@/utils/form/credential";
 import { actions } from "@/utils/form/formAction";
+import { formField } from "@/store/storeActions";
+import Link from "./Link.vue";
+import { ROUTE } from "@/utils/constants";
 export default {
   name: "NavigationComponent",
-  components: { Logo, Button, Icon, Avatar, UserPopover },
+  components: { Logo, Button, Icon, Avatar, UserPopover, Link },
   data() {
     return {
       plus: Icons.plus,
+      assetDiscoveryLink: ROUTE.ASSET_DISCOVERY.path,
+      name: this.$store.getters.name[0],
     };
   },
   inject: ["changeForm"],
@@ -45,8 +54,12 @@ export default {
         credentialField,
         actions.add,
         {},
-        "credentials"
+        "credentials",
+        this.fetchCredential
       );
+    },
+    fetchCredential() {
+      this.$store.dispatch(formField.actions.fetchFieldData);
     },
   },
 };

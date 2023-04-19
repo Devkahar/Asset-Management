@@ -1,4 +1,4 @@
-import { clientAction } from "../client";
+import { clientAction } from "../constants";
 import Icons from "../iconPath";
 
 export const actions = {
@@ -25,5 +25,17 @@ export const actions = {
     actionType: clientAction.patchClient,
     title: "Update",
     icon: Icons.edit,
+  },
+  search: {
+    placeholder: "search",
+    actionType: clientAction.postClient,
+    title: "Update",
+    icon: Icons.search,
+  },
+  schedule: {
+    placeholder: "schedule",
+    actionType: clientAction.postClient,
+    title: "Add",
+    icon: Icons.calender,
   },
 };

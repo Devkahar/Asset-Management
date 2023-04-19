@@ -11,7 +11,12 @@
           v-bind:key="subItems.key"
           :tab="subItems.title"
         >
-          <Data v-if="currentTab === subItems.key" :tab="currentTab" />
+          <Data
+            v-if="currentTab === subItems.key"
+            :tab="currentTab"
+            :parent-field-name="parentFieldName"
+            :key="currentTab"
+          />
         </a-tab-pane>
       </a-tabs>
     </a-tab-pane>
@@ -20,6 +25,7 @@
 
 <script>
 import Data from "@/components/Data.vue";
+import { mainFieldName } from "@/utils/helper";
 export default {
   name: "AssetView",
   data() {
@@ -27,6 +33,7 @@ export default {
       list: this.getArray(this.fields),
       currentTab: this.tab,
       last: null,
+      parentFieldName: mainFieldName.getAssetFileds,
     };
   },
   methods: {
@@ -41,7 +48,6 @@ export default {
     },
     tabChangeHandler(key) {
       this.currentTab = key;
-      console.log("Key ", key);
     },
     parentTabChange(key) {
       let next = this.currentTab;
@@ -50,9 +56,6 @@ export default {
       );
       this.last = next;
     },
-  },
-  created() {
-    console.log(this.list, this.tab);
   },
   props: {
     fields: {

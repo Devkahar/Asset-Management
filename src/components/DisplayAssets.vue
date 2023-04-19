@@ -21,7 +21,7 @@
           :default-current="pageNo"
           :total="totalItems"
           @showSizeChange="onShowSizeChange"
-          :pageSizeOptions="['1', '2', '3', '4']"
+          :pageSizeOptions="['5', '10', '25', '50']"
           :defaultPageSize="pageSize"
           @change="pageChangeHandler"
         />
@@ -36,14 +36,14 @@ import { hardWareAssetColumn, generateHardWareAssetData } from "@/utils/helper";
 import Link from "./Link.vue";
 
 export default {
-  name: "TableCompoenent",
+  name: "DisplayAssets",
   data() {
     return {
       columns: hardWareAssetColumn,
       data: [],
       loading: false,
       totalItems: 0,
-      pageSize: 1,
+      pageSize: 5,
       pageNo: 1,
     };
   },
@@ -70,7 +70,6 @@ export default {
       this.totalItems = res.data.totalElements;
     },
     onShowSizeChange(current, pageSize) {
-      console.log(current, pageSize);
       this.pageSize = pageSize;
       this.fetchData();
     },
@@ -80,19 +79,8 @@ export default {
       this.fetchData();
     },
   },
-  // watch: {
-  //   pageSize(val) {
-  //     console.log("pageSize", val);
-  //   },
-  //   current(val) {
-  //     console.log("current", val);
-  //   },
-  // },
   created() {
     this.fetchData();
-  },
-  mounted() {
-    this.$refs.table.pagination = {};
   },
   components: { Link },
 };

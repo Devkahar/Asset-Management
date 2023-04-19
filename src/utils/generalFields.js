@@ -1,4 +1,5 @@
 import { uuid } from "vue-uuid";
+import { cloneDeep } from "lodash";
 export const generateKey = () => uuid.v4();
 export const capitalize = (s) => {
   let str = "_" + s;
@@ -22,25 +23,33 @@ export const createField = (
   icon = null,
   initialValue = "",
   suffix = null,
-  options = null
-) => ({
-  id: generateKey(),
-  placeholder,
-  suffix,
-  type,
-  icon,
-  options,
-  initialValue,
-  decorator: [
-    fieldName,
-    {
-      initialValue,
-      rules,
-    },
-  ],
-});
+  options = null,
+  edit = true
+) => {
+  if (type === "date") {
+    if (initialValue) initialValue = initialValue.toString();
+  }
+  let newFiled = cloneDeep({
+    id: generateKey(),
+    placeholder: placeholder,
+    suffix: suffix,
+    type: type,
+    icon: icon,
+    options: options,
+    edit,
+    initialValue: initialValue,
+    decorator: [
+      fieldName,
+      {
+        initialValue: initialValue,
+        rules: rules,
+      },
+    ],
+  });
+  return newFiled;
+};
 
-export const generateValidation = (newFields) => {
+export const generateValidation = function (newFields) {
   const data = Object.entries(newFields).map((el) => {
     const FieldName = el[0];
     const FieldProperty = el[1];

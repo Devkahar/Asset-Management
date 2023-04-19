@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import AuthLayout from "@/layout/AuthLayout.vue";
 import HomeLayout from "@/layout/HomeLayout.vue";
 import { ROUTE } from "@/utils/constants";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -50,6 +51,23 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const user = store.getters.isUserAuth;
+  console.log("USer ", user);
+  if (user && (to.path === ROUTE.LOGIN.path || to.path === ROUTE.SIGNUP.path)) {
+    next({ path: ROUTE.HOME.path });
+  } else if (
+    (to.path === ROUTE.LOGIN.path || to.path === ROUTE.SIGNUP.path) &&
+    !user
+  ) {
+    next();
+  } else if (!user) {
+    next({ path: ROUTE.LOGIN.path });
+  } else {
+    next();
+  }
 });
 
 export default router;

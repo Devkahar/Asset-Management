@@ -9,7 +9,7 @@
     <!-- Login Form -->
     <Form
       :validate="validate"
-      :successHandler="() => {}"
+      :successHandler="signupHandler"
       :loading="false"
       buttonName="SignUp"
     />
@@ -30,6 +30,8 @@ import Alert from "@/components/Alert.vue";
 import Logo from "@/components/Logo.vue";
 import { signupValidation } from "@/utils/authValidation";
 import { ROUTE } from "@/utils/constants";
+import { postClient } from "@/utils/client";
+import { message } from "ant-design-vue/lib";
 
 export default {
   name: "LoginVue",
@@ -39,13 +41,28 @@ export default {
       loginPath: ROUTE.LOGIN.path,
       validate: signupValidation,
       error: null,
+      loading: false,
     };
   },
   methods: {
-    signupHandler(data) {
-      console.log(data);
-      if (!data) {
-        this.error = new Error("Error", "Message");
+    async signupHandler(body) {
+      try {
+        console.log(body);
+        this.error = null;
+        this.loading = false;
+        delete body["confirmPassword"];
+        const res = await postClient("register", body);
+        this.loading = false;
+        localStorage.setItem("userInfo", JSON.stringify(res.data));
+        this.$store.dispatch("signUp");
+        message.success("User Registered Successfully");
+        this.$router.push(ROUTE.HOME.path);
+      } catch (error) {
+        this.error = new Error(
+          "Auth Failed",
+          error?.response?.data?.message || error.message
+        );
+        this.loading = false;
       }
     },
   },

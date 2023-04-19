@@ -27,6 +27,7 @@ export default {
       action: actions.add,
       payload: {},
       url: "",
+      callback: () => {},
     };
   },
   computed: {
@@ -46,7 +47,8 @@ export default {
       newFileds,
       action = this.action.add,
       payload = {},
-      url = ""
+      url = "",
+      callback = () => {}
     ) {
       console.log(action);
       this.formName = name;
@@ -55,6 +57,7 @@ export default {
       this.action = action;
       this.payload = payload;
       this.url = url;
+      this.callback = callback;
     },
   },
   provide() {
@@ -68,6 +71,7 @@ export default {
       payload: computed(() => this.payload),
       action: computed(() => this.action),
       url: computed(() => this.url),
+      callback: computed(() => this.callback),
     };
   },
 };

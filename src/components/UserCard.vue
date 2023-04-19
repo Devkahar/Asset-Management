@@ -1,15 +1,17 @@
 <template>
   <div class="flex flex-col items-center">
     <div class="mb-2">
-      <Avatar :size="80"> Dev </Avatar>
+      <Avatar :size="80"> {{ name }} </Avatar>
     </div>
-    <Headline> Dev Kahar </Headline>
-    <p>dev.kahar@motadata.com</p>
+    <Headline> {{ name }} </Headline>
+    <p>{{ email }}</p>
     <div class="flex">
       <div class="mr-3">
         <Button shape="round"> Edit Profile </Button>
       </div>
-      <Button shape="round"> Sign Out </Button>
+      <Logout v-slot:default="{ logout }">
+        <Button shape="round" :click="logout"> Log Out </Button>
+      </Logout>
     </div>
   </div>
 </template>
@@ -18,9 +20,16 @@
 import { Avatar } from "ant-design-vue/lib";
 import Button from "./Button.vue";
 import Headline from "./Headline.vue";
+import Logout from "./Logout.vue";
 
 export default {
   name: "UserCard",
-  components: { Avatar, Headline, Button },
+  data() {
+    return {
+      name: this.$store.getters.name,
+      email: this.$store.getters.email,
+    };
+  },
+  components: { Avatar, Headline, Button, Logout },
 };
 </script>

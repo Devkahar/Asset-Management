@@ -1,44 +1,65 @@
+import router from "@/router";
+import store from "@/store";
 import axios from "axios";
-import { BASE_URL } from "./constants";
+import { ROUTE } from "./constants";
+// import { BASE_URL } from "./constants";
 
-export const clientAction = {
-  getClient: "getClient",
-  postClient: "postClient",
-  patchClient: "patchClient",
-  deleteClient: "deleteClient",
-  putClient: "putClient",
+const ErrorAction = (code) => {
+  if (code === 403) {
+    store.dispatch("logout");
+    router.push(ROUTE.LOGIN.path);
+  }
 };
-
-let config = {};
-export const setConfig = function (_config) {
-  config = _config;
-};
-
 export const getClient = async function (URL) {
-  const res = await axios.get(`${BASE_URL}${URL}`);
-  return res;
+  try {
+    console.log("Config --> ", store.getters.config);
+    const res = await axios.get(
+      `/api/${URL}`,
+      store.getters.config ? store.getters.config : {}
+    );
+    return res;
+  } catch (error) {
+    ErrorAction(error.response.status);
+    console.log(error);
+    throw new Error(error);
+  }
 };
 
 export const postClient = async function (URL, payload = {}) {
-  const res = await axios.post(`${BASE_URL}${URL}`, payload, config);
+  const res = await axios.post(
+    `/api/${URL}`,
+    payload,
+    store.getters.config ? store.getters.config : {}
+  );
   console.log(res);
   return res;
 };
 
 export const patchClient = async function (URL, payload = {}) {
-  const res = await axios.patch(`${BASE_URL}${URL}`, payload, config);
+  const res = await axios.patch(
+    `/api/${URL}`,
+    payload,
+    store.getters.config ? store.getters.config : {}
+  );
   console.log(res);
   return res;
 };
 
 export const putClient = async function (URL, payload = {}) {
-  const res = await axios.put(`${BASE_URL}${URL}`, payload, config);
+  const res = await axios.put(
+    `/api/${URL}`,
+    payload,
+    store.getters.config ? store.getters.config : {}
+  );
   console.log(res);
   return res;
 };
 
-export const deleteClient = async function (URL, payload = {}) {
-  const res = await axios.delete(`${BASE_URL}${URL}`, payload, config);
+export const deleteClient = async function (URL) {
+  const res = await axios.delete(
+    `/api/${URL}`,
+    store.getters.config ? store.getters.config : {}
+  );
   console.log(res);
   return res;
 };

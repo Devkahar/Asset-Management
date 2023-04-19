@@ -1,24 +1,24 @@
 import { capitalize, generateValidation } from "../generalFields";
 import {
-  dateField,
+  // dateField,
   descriptionFiled,
-  deviceStatusField,
+  // deviceStatusField,
   sizeField,
 } from "./commonField";
 
-// OS
+// Physical Disk
 export const physicalDiskFieldName = {
   name: "name",
   manufacturer: "manufacturer",
   size: "size",
-  intstalledDate: "intstalledDate",
-  deviceStatus: "deviceStatus",
-  partation: "partation",
+  // deviceStatus: "deviceStatus",
+  partition: "partition",
   mediaType: "mediaType",
   model: "model",
   interfaceType: "interfaceType",
   serialNumber: "serialNumber",
-  pnpDevice: "pnpDevice",
+  // pnpDeviceId: "pnpDeviceId",
+  // installedDate: "installedDate",
   description: "description",
 };
 
@@ -31,14 +31,18 @@ export const physicalDiskField = {
     placeholder: capitalize(physicalDiskFieldName.manufacturer),
     initialValue: "",
   },
-  [physicalDiskFieldName.size]: sizeField,
-  [physicalDiskFieldName.intstalledDate]: {
-    ...dateField,
-    placeholder: capitalize(physicalDiskFieldName.intstalledDate),
+  [physicalDiskFieldName.serialNumber]: {
+    placeholder: capitalize(physicalDiskFieldName.serialNumber),
+    initialValue: "",
   },
-  [physicalDiskFieldName.deviceStatus]: deviceStatusField,
-  [physicalDiskFieldName.partation]: {
-    placeholder: capitalize(physicalDiskFieldName.partation),
+  [physicalDiskFieldName.size]: sizeField,
+  // [physicalDiskFieldName.installedDate]: {
+  //   ...dateField,
+  //   placeholder: capitalize(physicalDiskFieldName.installedDate),
+  // },
+  // [physicalDiskFieldName.deviceStatus]: deviceStatusField,
+  [physicalDiskFieldName.partition]: {
+    placeholder: capitalize(physicalDiskFieldName.partition),
     initialValue: "",
   },
   [physicalDiskFieldName.mediaType]: {
@@ -53,10 +57,10 @@ export const physicalDiskField = {
     placeholder: capitalize(physicalDiskFieldName.interfaceType),
     initialValue: "",
   },
-  [physicalDiskFieldName.pnpDevice]: {
-    placeholder: capitalize(physicalDiskFieldName.pnpDevice),
-    initialValue: "",
-  },
+  // [physicalDiskFieldName.pnpDeviceId]: {
+  //   placeholder: capitalize(physicalDiskFieldName.pnpDeviceId),
+  //   initialValue: "",
+  // },
   [physicalDiskFieldName.description]: descriptionFiled,
 };
 

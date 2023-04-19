@@ -14,7 +14,13 @@
       </div>
       <hr />
       <div class="mt-5">
-        <DrawerForm :validate="fields" :successHandler="formSubmitHandler">
+        <DrawerForm
+          :key="formName"
+          :validate="fields"
+          :successHandler="formSubmitHandler"
+          :init="formInit"
+          v-if="visible"
+        >
           <template v-slot:footer="{ sumbitHandler }">
             <div class="flex justify-end">
               <div class="mr-2">
@@ -26,7 +32,7 @@
                   >{{ action.title }}</Button
                 >
               </div>
-              <Button shape="round" :click="onClose">Cancle</Button>
+              <Button shape="round" :click="onClose">Cancel</Button>
             </div>
           </template>
         </DrawerForm>
@@ -43,8 +49,9 @@ import Button from "@/components/Button.vue";
 import DrawerForm from "@/components/DrawerForm.vue";
 import { appForms } from "@/utils/form/form";
 import { actions } from "@/utils/form/formAction";
-import { clientAction, putClient, postClient } from "@/utils/client";
+import { putClient, postClient, patchClient } from "@/utils/client";
 import { message } from "ant-design-vue/lib";
+import { clientAction } from "@/utils/constants";
 export default {
   name: "DrawerComponent",
   data() {
@@ -52,9 +59,13 @@ export default {
       placement: "right",
       close: Icons.close,
       loading: false,
+      form: null,
     };
   },
   computed: {
+    formName() {
+      return appForms[this.formName].title;
+    },
     title() {
       return this.action.title + " " + appForms[this.formName]?.title ?? "";
     },
@@ -80,14 +91,18 @@ export default {
       from: "payload",
     },
     id: {
-      form: "id",
+      from: "id",
     },
     url: {
-      form: "url",
+      from: "url",
+    },
+    callback: {
+      from: "callback",
     },
   },
   methods: {
     onClose() {
+      this.form.resetFields();
       this.closeModel();
     },
     async formSubmitHandler(data) {
@@ -101,7 +116,9 @@ export default {
         let res;
         if (this.action.actionType === clientAction.putClient) {
           res = await putClient(this.url, body);
-          this.$store.dispatch("fetchAssetPropertyDetail");
+        }
+        if (this.action.actionType === clientAction.patchClient) {
+          res = await patchClient(this.url, body);
         }
         if (this.action.actionType === clientAction.postClient) {
           res = await postClient(this.url, body);
@@ -109,17 +126,20 @@ export default {
         }
         if (this.action.actionType === clientAction.deleteClient) {
           console.log(res);
-          // res = await deleteClient(this.url);
           console.log(this.url);
         }
         this.loading = false;
         console.log(res);
+        this.callback();
         this.onClose();
       } catch (error) {
         console.log(error);
         this.loading = false;
-        message.error(error.response.data.message);
+        message.error(error.message);
       }
+    },
+    formInit(form) {
+      this.form = form;
     },
   },
   components: { PageTitle, Icon, Button, DrawerForm },

@@ -6,21 +6,24 @@ const userStore = {
   }),
   getters: {
     config: function (state) {
-      return {
-        headers: {
-          authorization: `Bearer ${state.userInfo.token}`,
-        },
-      };
+      if (state.userInfo?.token)
+        return {
+          headers: {
+            Authorization: `Bearer ${state.userInfo?.token}`,
+          },
+        };
+      else {
+        return {};
+      }
     },
-    user_id: function (state) {
-      console.log(state.userInfo?._id);
-      return `${state.userInfo?._id}`;
-    },
-    user_name: function (state) {
+    name: function (state) {
       return `${state.userInfo?.name}`;
     },
+    email: function (state) {
+      return `${state.userInfo?.email}`;
+    },
     isUserAuth: function (state) {
-      if (state.userInfo && state.userInfo._id) return true;
+      if (state.userInfo && state.userInfo?.token) return true;
       return false;
     },
   },
@@ -39,6 +42,9 @@ const userStore = {
       context.commit("logout");
     },
     login(context) {
+      context.commit("setDataFromLocal");
+    },
+    signUp(context) {
       context.commit("setDataFromLocal");
     },
     updateUserInfo(context) {

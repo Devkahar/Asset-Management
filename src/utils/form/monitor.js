@@ -1,47 +1,47 @@
 import { capitalize, generateValidation } from "../generalFields";
 import {
-  dateField,
+  // dateField,
   descriptionFiled,
-  deviceStatusField,
+  // deviceStatusField,
   manufacturerField,
-  sizeField,
+  // sizeField,
 } from "./commonField";
 
 export const monitorFieldName = {
   manufacturer: "manufacturer",
-  monitorType: "monitorType",
-  size: "size",
-  deviceStatus: "deviceStatus",
-  serialNumber: "serialNumber",
-  installedDate: "installedDate",
-  PNPDeviceId: "PNPDeviceId",
+  // monitorType: "monitorType",
+  // size: "size",
+  // deviceStatus: "deviceStatus",
+  // serialNumber: "serialNumber",
+  // installedDate: "installedDate",
+  // PNPDeviceId: "PNPDeviceId",
   screenHeight: "screenHeight",
   screenWidth: "screenWidth",
-  weekOfManufacture: "weekOfManufacture",
-  yearOfManufacture: "yearOfManufacture",
+  // weekOfManufacture: "weekOfManufacture",
+  // yearOfManufacture: "yearOfManufacture",
   description: "description",
 };
 
 export const monitorField = {
   [monitorFieldName.manufacturer]: manufacturerField,
-  [monitorFieldName.monitorType]: {
-    placeholder: capitalize(monitorFieldName.monitorType),
-    initialValue: "",
-  },
-  [monitorFieldName.size]: sizeField,
-  [monitorFieldName.serialNumber]: {
-    placeholder: capitalize(monitorFieldName.serialNumber),
-    initialValue: "",
-  },
-  [monitorFieldName.deviceStatus]: deviceStatusField,
-  [monitorFieldName.installedDate]: {
-    ...dateField,
-    placeholder: capitalize(monitorFieldName.installedDate),
-  },
-  [monitorFieldName.PNPDeviceId]: {
-    placeholder: "PNP Device ID",
-    initialValue: "",
-  },
+  // [monitorFieldName.monitorType]: {
+  //   placeholder: capitalize(monitorFieldName.monitorType),
+  //   initialValue: "",
+  // },
+  // [monitorFieldName.size]: sizeField,
+  // [monitorFieldName.serialNumber]: {
+  //   placeholder: capitalize(monitorFieldName.serialNumber),
+  //   initialValue: "",
+  // },
+  // [monitorFieldName.deviceStatus]: deviceStatusField,
+  // [monitorFieldName.installedDate]: {
+  //   ...dateField,
+  //   placeholder: capitalize(monitorFieldName.installedDate),
+  // },
+  // [monitorFieldName.PNPDeviceId]: {
+  //   placeholder: "PNP Device ID",
+  //   initialValue: "",
+  // },
   [monitorFieldName.screenHeight]: {
     placeholder: capitalize(monitorFieldName.screenHeight),
     initialValue: "",
@@ -52,16 +52,16 @@ export const monitorField = {
     initialValue: "",
     type: "number",
   },
-  [monitorFieldName.weekOfManufacture]: {
-    placeholder: capitalize(monitorFieldName.weekOfManufacture),
-    initialValue: "",
-    type: "number",
-  },
-  [monitorFieldName.yearOfManufacture]: {
-    placeholder: capitalize(monitorFieldName.yearOfManufacture),
-    initialValue: "",
-    type: "number",
-  },
+  // [monitorFieldName.weekOfManufacture]: {
+  //   placeholder: capitalize(monitorFieldName.weekOfManufacture),
+  //   initialValue: "",
+  //   type: "number",
+  // },
+  // [monitorFieldName.yearOfManufacture]: {
+  //   placeholder: capitalize(monitorFieldName.yearOfManufacture),
+  //   initialValue: "",
+  //   type: "number",
+  // },
   [monitorFieldName.description]: descriptionFiled,
 };
 

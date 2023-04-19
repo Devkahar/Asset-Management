@@ -1,20 +1,20 @@
 import { capitalize, generateValidation } from "../generalFields";
 import {
   descriptionFiled,
-  deviceStatusField,
-  driveTypeField,
+  // deviceStatusField,
+  // driveTypeField,
   sizeField,
 } from "./commonField";
 
 // OS
 export const logicalDiskFieldName = {
   name: "name",
-  fileSystem: "fileSystem",
-  driveType: "driveType",
+  fileSystem: "fileSystemType",
+  // driveType: "driveType",
   serialNumber: "serialNumber",
-  deviceStatus: "deviceStatus",
+  // deviceStatus: "deviceStatus",
   size: "size",
-  freeSpace: "freeSpace",
+  // freeSpace: "freeSpace",
   description: "description",
 };
 
@@ -27,17 +27,17 @@ export const logicalDiskField = {
     placeholder: capitalize(logicalDiskFieldName.fileSystem),
     initialValue: "",
   },
-  [logicalDiskFieldName.driveType]: driveTypeField,
+  // [logicalDiskFieldName.driveType]: driveTypeField,
   [logicalDiskFieldName.serialNumber]: {
     placeholder: capitalize(logicalDiskFieldName.serialNumber),
     initialValue: "",
   },
-  [logicalDiskFieldName.deviceStatus]: deviceStatusField,
+  // [logicalDiskFieldName.deviceStatus]: deviceStatusField,
   [logicalDiskFieldName.size]: sizeField,
-  [logicalDiskFieldName.freeSpace]: {
-    ...sizeField,
-    placeholder: capitalize(logicalDiskFieldName.freeSpace),
-  },
+  // [logicalDiskFieldName.freeSpace]: {
+  //   ...sizeField,
+  //   placeholder: capitalize(logicalDiskFieldName.freeSpace),
+  // },
   [logicalDiskFieldName.description]: descriptionFiled,
 };
 

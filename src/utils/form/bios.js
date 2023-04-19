@@ -1,23 +1,23 @@
 import { capitalize, generateValidation } from "../generalFields";
-import { descriptionFiled, manufacturerField } from "./commonField";
+import { manufacturerField } from "./commonField";
 
 // BIOS
 export const biosFieldName = {
-  name: "name",
+  // name: "name",
   manufacturer: "manufacturer",
   sMBIOSVersion: "smBiosVersion",
   releaseDate: "releaseDate",
-  deviceStatus: "deviceStatus",
+  // deviceStatus: "deviceStatus",
   version: "version",
   serialNumber: "serialNumber",
-  description: "description",
+  // description: "description",
 };
 
 export const biosFiled = {
-  [biosFieldName.name]: {
-    placeholder: capitalize(biosFieldName.name),
-    initialValue: "",
-  },
+  // [biosFieldName.name]: {
+  //   placeholder: capitalize(biosFieldName.name),
+  //   initialValue: "",
+  // },
   [biosFieldName.manufacturer]: manufacturerField,
   [biosFieldName.sMBIOSVersion]: {
     placeholder: "SM BIOS Version",
@@ -28,10 +28,10 @@ export const biosFiled = {
     initialValue: "",
     type: "date",
   },
-  [biosFieldName.deviceStatus]: {
-    placeholder: capitalize(biosFieldName.deviceStatus),
-    initialValue: "",
-  },
+  // [biosFieldName.deviceStatus]: {
+  //   placeholder: capitalize(biosFieldName.deviceStatus),
+  //   initialValue: "",
+  // },
   [biosFieldName.version]: {
     placeholder: capitalize(biosFieldName.version),
     initialValue: "",
@@ -40,7 +40,7 @@ export const biosFiled = {
     placeholder: capitalize(biosFieldName.serialNumber),
     initialValue: "",
   },
-  [biosFieldName.description]: descriptionFiled,
+  // [biosFieldName.description]: descriptionFiled,
 };
 
 export const biosValidation = function (newFields = biosFiled) {

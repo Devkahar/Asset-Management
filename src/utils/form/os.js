@@ -1,22 +1,22 @@
 import { capitalize, generateValidation } from "../generalFields";
-import { dateField } from "./commonField";
+import { dateField, osArchitectureField } from "./commonField";
 
 // OS
 export const osFieldName = {
-  manufacturer: "manufacturer",
+  // manufacturer: "manufacturer",
   OSName: "osName",
   OSVersion: "osVersion",
   OSArchitecture: "osArchitecture",
-  licenseKey: "licenseKey",
-  activationStatus: "activationStatus",
+  // licenseKey: "licenseKey",
+  // activationStatus: "activationStatus",
   installedDate: "installedDate",
 };
 
 export const osField = {
-  [osFieldName.manufacturer]: {
-    placeholder: capitalize(osFieldName.manufacturer),
-    initialValue: "",
-  },
+  // [osFieldName.manufacturer]: {
+  //   placeholder: capitalize(osFieldName.manufacturer),
+  //   initialValue: "",
+  // },
   [osFieldName.OSName]: {
     placeholder: capitalize(osFieldName.OSName),
     initialValue: "",
@@ -27,16 +27,16 @@ export const osField = {
   },
   [osFieldName.OSArchitecture]: {
     placeholder: capitalize(osFieldName.OSArchitecture),
-    initialValue: "",
+    ...osArchitectureField,
   },
-  [osFieldName.activationStatus]: {
-    placeholder: capitalize(osFieldName.activationStatus),
-    initialValue: "",
-  },
-  [osFieldName.licenseKey]: {
-    placeholder: capitalize(osFieldName.licenseKey),
-    initialValue: "",
-  },
+  // [osFieldName.activationStatus]: {
+  //   placeholder: capitalize(osFieldName.activationStatus),
+  //   initialValue: "",
+  // },
+  // [osFieldName.licenseKey]: {
+  //   placeholder: capitalize(osFieldName.licenseKey),
+  //   initialValue: "",
+  // },
   [osFieldName.installedDate]: {
     ...dateField,
     placeholder: capitalize(osFieldName.installedDate),

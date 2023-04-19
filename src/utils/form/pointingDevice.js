@@ -1,7 +1,7 @@
 import { capitalize, generateValidation } from "../generalFields";
 import {
   descriptionFiled,
-  deviceStatusField,
+  // deviceStatusField,
   manufacturerField,
   pointingTypeField,
 } from "./commonField";
@@ -10,8 +10,8 @@ export const pointingDeviceFieldName = {
   manufacturer: "manufacturer",
   numberOfButtons: "numberOfButtons",
   description: "description",
-  deviceStatus: "deviceStatus",
-  PNPDeviceId: "PNPDeviceId",
+  // deviceStatus: "deviceStatus",
+  // PNPDeviceId: "PNPDeviceId",
   pointingType: "pointingType",
 };
 
@@ -23,11 +23,11 @@ export const pointingDeviceField = {
     type: "number",
   },
   [pointingDeviceFieldName.pointingType]: pointingTypeField,
-  [pointingDeviceFieldName.deviceStatus]: deviceStatusField,
-  [pointingDeviceFieldName.PNPDeviceId]: {
-    placeholder: "PNP Device ID",
-    initialValue: "",
-  },
+  // [pointingDeviceFieldName.deviceStatus]: deviceStatusField,
+  // [pointingDeviceFieldName.PNPDeviceId]: {
+  //   placeholder: "PNP Device ID",
+  //   initialValue: "",
+  // },
   [pointingDeviceFieldName.description]: descriptionFiled,
 };
 

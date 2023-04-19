@@ -1,7 +1,7 @@
 import { capitalize, generateValidation } from "../generalFields";
 import {
   cacheSizeFiled,
-  clockSpeedField,
+  // clockSpeedField,
   cpuSpeedField,
   descriptionFiled,
   manufacturerField,
@@ -13,14 +13,14 @@ export const processorFieldName = {
   width: "width",
   cpuSpeed: "cpuSpeed",
   coreCount: "coreCount",
-  externalClock: "externalClock",
+  // externalClock: "externalClock",
   l1CacheSize: "l1CacheSize",
   l2CacheSize: "l2CacheSize",
   l3CacheSize: "l3CacheSize",
   family: "family",
   description: "description",
-  deviceId: "deviceId",
-  socketDesign: "socketDesign",
+  // deviceId: "deviceId",
+  // socketDesign: "socketDesign",
 };
 
 export const processorField = {
@@ -31,17 +31,18 @@ export const processorField = {
   },
   [processorFieldName.cpuSpeed]: cpuSpeedField,
   [processorFieldName.width]: {
-    placeholder: capitalize(processorFieldName.cpuSpeed),
+    placeholder: capitalize(processorFieldName.width),
     initialValue: "",
   },
   [processorFieldName.coreCount]: {
     placeholder: capitalize(processorFieldName.coreCount),
     initialValue: "",
+    type: "number",
   },
-  [processorFieldName.externalClock]: {
-    ...clockSpeedField,
-    placeholder: "External Clock",
-  },
+  // [processorFieldName.externalClock]: {
+  //   ...clockSpeedField,
+  //   placeholder: "External Clock",
+  // },
   [processorFieldName.l1CacheSize]: {
     ...cacheSizeFiled,
     placeholder: capitalize(processorFieldName.l1CacheSize),
@@ -59,14 +60,14 @@ export const processorField = {
     initialValue: "",
   },
   [processorFieldName.description]: descriptionFiled,
-  [processorFieldName.deviceId]: {
-    placeholder: capitalize(processorFieldName.deviceId),
-    initialValue: "",
-  },
-  [processorFieldName.socketDesign]: {
-    placeholder: capitalize(processorFieldName.socketDesign),
-    initialValue: "",
-  },
+  // [processorFieldName.deviceId]: {
+  //   placeholder: capitalize(processorFieldName.deviceId),
+  //   initialValue: "",
+  // },
+  // [processorFieldName.socketDesign]: {
+  //   placeholder: capitalize(processorFieldName.socketDesign),
+  //   initialValue: "",
+  // },
 };
 
 export const processorValidation = function (newFields = processorField) {

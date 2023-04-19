@@ -13,6 +13,7 @@ export const manufacturerField = {
 export const widthField = {
   placeholder: "Width",
   initialValue: "",
+  type: "number",
   suffix: "Bit",
 };
 
@@ -20,25 +21,25 @@ export const sizeField = {
   placeholder: "Size",
   initialValue: "",
   type: "number",
-  suffix: "GB",
+  suffix: "Bytes",
 };
 
 export const clockSpeedField = {
   placeholder: "Clock Speed",
   initialValue: "",
-  suffix: "MHz",
+  suffix: "Frequency",
 };
 
 export const cpuSpeedField = {
   placeholder: "CPU Speed",
-  intialValue: "",
-  suffix: "GHz",
+  initialValue: "",
+  suffix: "Frequency",
 };
 
 export const cacheSizeFiled = {
   placeholder: "Cache Size",
-  intialValue: "",
-  suffix: "MB",
+  initialValue: "",
+  suffix: "Bytes",
 };
 
 export const osArchitectureField = {
