@@ -14,7 +14,7 @@ import { Error } from "@/utils/helper";
 import Skeleton from "./Skeleton.vue";
 
 export default {
-  name: "SkeletonComponent",
+  name: "FetchLayout",
   props: {
     loading: {
       type: Boolean,

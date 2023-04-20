@@ -46,12 +46,12 @@ import Icon from "@/components/Icon.vue";
 import PageTitle from "@/components/PageTitle.vue";
 import Icons from "@/utils/iconPath";
 import Button from "@/components/Button.vue";
-import DrawerForm from "@/components/DrawerForm.vue";
 import { appForms } from "@/utils/form/form";
 import { actions } from "@/utils/form/formAction";
 import { putClient, postClient, patchClient } from "@/utils/http/client";
 import { message } from "ant-design-vue/lib";
 import { clientAction } from "@/utils/constants";
+import DrawerForm from "./DrawerForm.vue";
 export default {
   name: "DrawerComponent",
   data() {

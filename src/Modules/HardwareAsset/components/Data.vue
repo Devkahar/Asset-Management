@@ -47,8 +47,6 @@
 <script>
 import DataItem from "./DataItem.vue";
 import { deleteClient, getClient } from "@/utils/http/client";
-import Button from "./Button.vue";
-import FetchLayout from "./FetchLayout.vue";
 import { actions } from "@/utils/form/formAction";
 import { convertToArray } from "@/utils/helper";
 import { mainFieldName } from "@/utils/tabs/index";
@@ -58,6 +56,7 @@ import { forms } from "@/utils/form/formName";
 import { schedulerFiled, schedulerFiledName } from "@/utils/form/scheduler";
 import { getArrayOfFieldFromApi } from "@/utils/http/resDataConversion";
 import DataAction from "./DataAction.vue";
+import Button from "@/components/Button.vue";
 export default {
   name: "DataComponent",
   inject: ["changeForm", "id"],
@@ -191,6 +190,6 @@ export default {
     this.initState();
   },
   destroyed() {},
-  components: { DataItem, Button, FetchLayout, DataAction },
+  components: { DataItem, Button, DataAction },
 };
 </script>

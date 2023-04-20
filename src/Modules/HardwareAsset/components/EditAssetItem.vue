@@ -28,10 +28,10 @@
 </template>
 
 <script>
-import Icon from "./Icon.vue";
 import Icons from "@/utils/iconPath";
 import { patchClient } from "@/utils/http/client";
 import { message } from "ant-design-vue/lib";
+import Icon from "@/components/Icon.vue";
 export default {
   name: "EditAsset",
   data() {

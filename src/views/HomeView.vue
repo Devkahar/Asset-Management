@@ -1,12 +1,12 @@
 <template>
-  <HomeComponent />
+  <AssetHome />
 </template>
 
 <script>
-import HomeComponent from "@/components/HomeComponent.vue";
+import AssetHome from "@/Modules/HardwareAsset/components/AssetHome.vue";
 
 export default {
   name: "HomeView",
-  components: { HomeComponent },
+  components: { AssetHome },
 };
 </script>

@@ -1,12 +1,10 @@
-import { generateKey } from "./generalFields";
-
 export const descisionOption = [
   {
-    id: generateKey(),
+    id: "YES",
     value: "Yes",
   },
   {
-    id: generateKey(),
+    id: "NO",
     value: "No",
   },
 ];
@@ -167,15 +165,17 @@ export const weekOptions = [
     value: "Sunday",
   },
 ];
-export const keyValue = {
-  [osArchitectureOption[0].id]: osArchitectureOption[0].value,
-  [osArchitectureOption[1].id]: osArchitectureOption[1].value,
-  [credentialOptions[0].id]: credentialOptions[0].value,
-  [ipRangeOptions[0].id]: ipRangeOptions[0].value,
-  [ipRangeOptions[1].id]: ipRangeOptions[1].value,
-  [scanTypeOptions[0].id]: scanTypeOptions[0].value,
-  [schedulerOption[0].id]: schedulerOption[0].value,
-  [schedulerOption[1].id]: schedulerOption[1].value,
-  [schedulerOption[2].id]: schedulerOption[2].value,
-  [schedulerOption[3].id]: schedulerOption[3].value,
-};
+
+const allAppOptions = [
+  ...descisionOption,
+  ...osArchitectureOption,
+  ...ipRangeOptions,
+  ...scanTypeOptions,
+  ...credentialOptions,
+  ...schedulerOption,
+  ...monthOption,
+  ...weekOptions,
+];
+export const keyValue = allAppOptions.reduce((acc, el) => {
+  return { ...acc, [el.id]: el.value };
+}, {});

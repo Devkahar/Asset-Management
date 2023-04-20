@@ -19,13 +19,16 @@ export const ROUTE = {
     path: "/assetDiscovery",
     name: "assetDiscoveryPage",
   },
+  PAGENOTFOUND: {
+    path: "*",
+    name: "PageNotFound",
+  },
 };
-
+export const fieldTypeConstants = {};
 export const clientAction = {
   getClient: "getClient",
   postClient: "postClient",
   patchClient: "patchClient",
   deleteClient: "deleteClient",
   putClient: "putClient",
-  schedulerClient: "schedulerClient",
 };

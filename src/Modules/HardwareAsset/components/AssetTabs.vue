@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import Data from "@/components/Data.vue";
 import { mainFieldName } from "@/utils/tabs";
+import Data from "./Data.vue";
 
 export default {
   name: "AssetTabs",

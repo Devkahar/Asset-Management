@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import AssetItem from "@/components/AssetItem.vue";
-import AssetsTabs from "@/components/AssetTabs.vue";
-import EditAsset from "@/components/EditAsset.vue";
+import AssetItem from "@/Modules/HardwareAsset/components/AssetItem.vue";
+import AssetsTabs from "@/Modules/HardwareAsset/components/AssetTabs.vue";
+import EditAsset from "@/Modules/HardwareAsset/components/EditAsset.vue";
 import FetchLayout from "@/components/FetchLayout.vue";
 import PageBack from "@/components/PageBack.vue";
 import PageTitle from "@/components/PageTitle.vue";
@@ -56,7 +56,7 @@ export default {
       return this.$store.state.assetState.error;
     },
     assetItems() {
-      return this.$store.state.assetState.assetItems;
+      return this.$store.getters.assetItems;
     },
   },
   inject: ["id"],

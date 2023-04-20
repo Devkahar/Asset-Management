@@ -42,3 +42,7 @@ html {
 .ant-drawer-body {
   height: 100%;
 }
+.ant-message-custom-content {
+  display: flex;
+  align-items: center;
+}

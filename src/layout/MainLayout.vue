@@ -11,14 +11,13 @@
 </template>
 
 <script>
-import Drawer from "@/components/Drawer.vue";
 import Navigation from "@/components/Navigation.vue";
 import { forms } from "@/utils/form/formName";
 import { computed } from "vue";
 import { actions } from "@/utils/form/formAction";
+import Drawer from "@/Modules/HardwareAsset/components/Drawer.vue";
 export default {
   name: "HomeLayout",
-  components: { Navigation, Drawer },
   data() {
     return {
       visible: false,
@@ -74,5 +73,6 @@ export default {
       callback: computed(() => this.callback),
     };
   },
+  components: { Navigation, Drawer },
 };
 </script>

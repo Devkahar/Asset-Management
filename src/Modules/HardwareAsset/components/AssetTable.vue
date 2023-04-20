@@ -36,7 +36,7 @@ import {
   hardWareAssetColumn,
   generateHardWareAssetData,
 } from "@/utils/table/hardwareAssetTable";
-import Link from "./Link.vue";
+import Link from "../../../components/Link.vue";
 
 export default {
   name: "AssetTable",
@@ -52,25 +52,32 @@ export default {
   },
   methods: {
     async fetchData() {
-      const res = await getClient(
-        `asset?pageNo=${this.pageNo - 1}&pageSize=${
-          this.pageSize
-        }&sortBy=id&sortDir=asc`
-      );
-      console.log(res);
-      this.data = res.data.assetRestList.map((el) => {
-        return generateHardWareAssetData(
-          el.id,
-          el.assetType,
-          el.assetName,
-          el.hostName,
-          el.ipAddress,
-          el.serialNumber,
-          el.macAddress,
-          el.subNetMask
+      try {
+        this.loading = true;
+        const res = await getClient(
+          `asset?pageNo=${this.pageNo - 1}&pageSize=${
+            this.pageSize
+          }&sortBy=id&sortDir=asc`
         );
-      });
-      this.totalItems = res.data.totalElements;
+        this.loading = false;
+        console.log(res);
+        this.data = res.data.assetRestList.map((el) => {
+          return generateHardWareAssetData(
+            el.id,
+            el.assetType,
+            el.assetName,
+            el.hostName,
+            el.ipAddress,
+            el.serialNumber,
+            el.macAddress,
+            el.subNetMask
+          );
+        });
+        this.totalItems = res.data.totalElements;
+      } catch (error) {
+        this.loading = false;
+        console.log(error);
+      }
     },
     onShowSizeChange(current, pageSize) {
       this.pageSize = pageSize;

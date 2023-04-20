@@ -9,11 +9,11 @@
 
 <script>
 import FetchLayout from "@/components/FetchLayout.vue";
-import PageTitle from "./PageTitle.vue";
+import PageTitle from "@/components/PageTitle.vue";
 import AssetTable from "./AssetTable.vue";
 
 export default {
-  name: "HomeComponent",
+  name: "AssetHome",
   components: { FetchLayout, PageTitle, AssetTable },
 };
 </script>

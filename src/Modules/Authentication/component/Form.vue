@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import Button from "./Button.vue";
-import Icon from "./Icon.vue";
+import Button from "@/components/Button.vue";
+import Icon from "@/components/Icon.vue";
 
 export default {
   name: "FormComponent",

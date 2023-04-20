@@ -24,7 +24,6 @@
 import HeadlineComponent from "@/components/Headline.vue";
 import IconsName from "@/utils/iconPath.js";
 import { Error } from "@/utils/helper";
-import Form from "@/components/Form.vue";
 import Link from "@/components/Link.vue";
 import Logo from "@/components/Logo.vue";
 import { loginValidation } from "@/utils/form/authValidation";
@@ -32,6 +31,7 @@ import { ROUTE } from "@/utils/constants";
 import { message } from "ant-design-vue/lib";
 import { postClient } from "@/utils/http/client";
 import Alert from "@/components/Alert.vue";
+import Form from "../component/Form.vue";
 
 export default {
   name: "LoginVue",

@@ -1,49 +1,30 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import AuthLayout from "@/layout/AuthLayout.vue";
-import HomeLayout from "@/layout/HomeLayout.vue";
+import MainLayout from "@/layout/MainLayout.vue";
 import { ROUTE } from "@/utils/constants";
 import store from "@/store";
-
+import { AuthenticationRoutes } from "@/Modules/Authentication/router";
+import { hardwareAssetRoutes } from "@/Modules/HardwareAsset/router";
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: ROUTE.HOME.path,
     name: ROUTE.HOME.name,
-    meta: { layout: HomeLayout },
+    meta: { layout: MainLayout },
     component: () =>
       import(/* webpackChunkName: "HomeView" */ "../views/HomeView.vue"),
   },
+  ...AuthenticationRoutes,
+  ...hardwareAssetRoutes,
   {
-    path: ROUTE.LOGIN.path,
-    name: ROUTE.LOGIN.name,
-    meta: { layout: AuthLayout },
+    path: "*",
+    name: ROUTE.PAGENOTFOUND.name,
     component: () =>
-      import(/* webpackChunkName: "LoginView" */ "../views/LoginView.vue"),
-  },
-  {
-    path: ROUTE.SIGNUP.path,
-    name: ROUTE.SIGNUP.name,
-    meta: { layout: AuthLayout },
-    component: () =>
-      import(/* webpackChunkName: "SignupView" */ "../views/SignupView.vue"),
-  },
-  {
-    path: ROUTE.ASSET_DISCOVERY.path,
-    name: ROUTE.ASSET_DISCOVERY.name,
-    meta: { layout: HomeLayout },
-    component: () =>
-      import(
-        /* webpackChunkName: "AssetdiscoveryView" */ "../views/AssetdiscoveryView.vue"
-      ),
-  },
-  {
-    path: ROUTE.ASSET.path,
-    name: ROUTE.ASSET.name,
-    meta: { layout: HomeLayout },
-    component: () =>
-      import(/* webpackChunkName: "AssetView" */ "../views/AssetView.vue"),
+      import(/* webpageChunkName:"UserView"*/ "@/views/NotfoundView.vue"),
+    meta: {
+      layout: MainLayout,
+    },
   },
 ];
 
