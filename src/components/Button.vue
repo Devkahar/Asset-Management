@@ -1,6 +1,6 @@
 <template>
   <a-button
-    type="primary"
+    :type="type"
     @click="click"
     :loading="loading"
     :html-type="htmlType"
@@ -8,7 +8,7 @@
     :shape="shape"
     :block="block"
   >
-    <div class="flex items-center justify-center">
+    <div class="w-full flex items-center justify-center">
       <slot>Click Me</slot>
       <slot name="tail"></slot>
     </div>
@@ -35,11 +35,15 @@ export default {
     },
     shape: {
       type: String,
-      default: "default",
+      default: "round",
     },
     block: {
       type: Boolean,
       default: false,
+    },
+    type: {
+      type: String,
+      default: "primary",
     },
   },
 };

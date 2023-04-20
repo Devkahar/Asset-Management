@@ -22,7 +22,6 @@
               {{ option.value }}
             </a-radio>
           </a-radio-group>
-
           <a-select
             v-else-if="field.type === 'option'"
             :placeholder="field.placeholder"
@@ -43,6 +42,7 @@
             v-decorator="field.decorator"
             valueFormat="x"
             format="DD/MM/YYYY"
+            showTime
           />
           <a-time-picker
             v-else-if="field.type === 'time'"
@@ -66,7 +66,6 @@
               {{ option.value }}
             </a-select-option>
           </a-select>
-
           <a-input
             v-else-if="field.type !== 'fetchList'"
             :placeholder="field.placeholder"
@@ -86,19 +85,21 @@
 </template>
 
 <script>
-import { getClient } from "@/utils/client";
-import { generateKey } from "@/utils/generalFields";
+import { getClient } from "@/utils/http/client";
+import { generateKey } from "@/utils/form/generalFields";
 import { message } from "ant-design-vue/lib";
 import { networkDiscoveryFieldNames } from "@/utils/form/networkScan";
 import { cloneDeep } from "lodash";
 import { actions } from "@/utils/form/formAction";
+import { removeFieldNames } from "@/utils/helper";
 import {
   getFrequencyString,
   convertToBytes,
   convertToHz,
   getByteString,
-  removeFieldNames,
-} from "@/utils/helper";
+} from "@/utils/conversion";
+import { schedulerFiledName } from "@/utils/form/scheduler";
+import moment from "moment";
 let fields;
 export default {
   name: "DrawerForm",
@@ -109,11 +110,16 @@ export default {
       generateKey,
       credentialsOptions: [],
       loadingOptions: false,
-      defaultCredOptions: ["refIds", { initialValue: [], rules: [] }],
-      hideCredential: false,
+      defaultCredOptions: [
+        networkDiscoveryFieldNames.credentials,
+        { initialValue: [], rules: [] },
+      ],
       actions: actions,
       removeFields: [],
-      initDeleteField: ["ipRangeType", "scanType"],
+      initDeleteField: [
+        networkDiscoveryFieldNames.ipRangeType,
+        schedulerFiledName.scheduleType,
+      ],
     };
   },
   computed: {
@@ -153,11 +159,10 @@ export default {
   created() {
     this.formInputs = this.generateFields();
     this.init(this.form);
-    if (this.newFileds["refIds"]) {
+    if (this.newFileds[networkDiscoveryFieldNames.credentials]) {
       this.fetchCredentials();
     }
     this.initDeleteField.map((key) => {
-      console.log("Initial Value", this.newFileds, key);
       if (this.newFileds[key]?.initialValue) {
         this.removeFields = removeFieldNames[this.newFileds[key].initialValue];
         this.formInputs = this.generateFields();
@@ -165,6 +170,9 @@ export default {
     });
   },
   methods: {
+    disabledDate(current) {
+      return current < moment().subtract(1, "days");
+    },
     setDefaultCredentialFileds() {
       if (Array.isArray(this.formInputs)) {
         this.formInputs.map((el) => {
@@ -191,21 +199,9 @@ export default {
         message.error(error.message);
       }
     },
-    generateFields() {
-      fields = cloneDeep(this.newFileds);
-      if (this.action.actionType !== actions.add.actionType) {
-        if (fields["password"]) {
-          fields["password"].initialValue = "";
-        }
-      }
-      this.removeFields.map((el) => {
-        delete fields[el];
-      });
-      console.log(fields);
+    convertFieldsToHighest(fields) {
       Object.entries(fields).map((el) => {
         let key = el[0];
-        console.log(key);
-
         if (fields[key].suffix === "Bytes") {
           let res = getByteString(fields[key].initialValue).split(" ");
           let value = Number.parseFloat(res[0]);
@@ -220,6 +216,46 @@ export default {
           fields[key].suffix = res[1];
           fields[key].type = "number";
         }
+        if (fields[key].suffix === "min") {
+          fields[key].initialValue =
+            Number.parseInt(fields[key].initialValue) / 60000;
+        }
+      });
+    },
+    convertFieldToLowest(values) {
+      if (typeof values[networkDiscoveryFieldNames.ipList] === "string") {
+        values[networkDiscoveryFieldNames.ipList] =
+          values[networkDiscoveryFieldNames.ipList].split(",");
+      }
+      Object.entries(values).map((el) => {
+        let key = el[0];
+        if (fields[key].type === "number") {
+          values[key] = Number.parseFloat(values[key]);
+        }
+        if (this.newFileds[key].suffix === "min") {
+          values[key] = Number.parseInt(values[key]) * 60000;
+        }
+        if (this.newFileds[key].suffix === "Bytes") {
+          values[key] = convertToBytes(values[key], fields[key].suffix);
+        }
+        if (this.newFileds[key].suffix === "Frequency") {
+          values[key] = convertToHz(values[key], fields[key].suffix);
+        }
+        if (this.newFileds[key].type === "time") {
+          values[key] = Number.parseInt(values[key]) * 3600000;
+        }
+      });
+    },
+    generateFields() {
+      fields = cloneDeep(this.newFileds);
+      this.convertFieldsToHighest(fields);
+      if (this.action.actionType !== actions.add.actionType) {
+        if (fields["password"]) {
+          fields["password"].initialValue = "";
+        }
+      }
+      this.removeFields.map((el) => {
+        delete fields[el];
       });
       let data = cloneDeep(this.validate.apply(this.form, [fields]));
       console.log("Here Are new Fields ", data);
@@ -230,26 +266,7 @@ export default {
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           console.log("Form Values ", values);
-          if (typeof values[networkDiscoveryFieldNames.ipList] === "string") {
-            values[networkDiscoveryFieldNames.ipList] =
-              values[networkDiscoveryFieldNames.ipList].split(",");
-          }
-          Object.entries(values).map((el) => {
-            let key = el[0];
-            console.log(key);
-            if (fields[key].type === "number") {
-              values[key] = Number.parseFloat(values[key]);
-            }
-            if (this.newFileds[key].suffix === "Bytes") {
-              values[key] = convertToBytes(values[key], fields[key].suffix);
-            }
-            if (this.newFileds[key].suffix === "Frequency") {
-              values[key] = convertToHz(values[key], fields[key].suffix);
-            }
-            if (this.newFileds[key].type === "time") {
-              values[key] = Number.parseInt(values[key]) * 3600000;
-            }
-          });
+          this.convertFieldToLowest(values);
           this.successHandler(values);
         }
       });
@@ -260,11 +277,10 @@ export default {
     },
     switchField(value) {
       console.log("Value ", value, " remove ", removeFieldNames[value]);
-      if (value) {
-        if (removeFieldNames[value]) {
-          this.removeFields = removeFieldNames[value];
-          this.formInputs = this.generateFields();
-        }
+
+      if (removeFieldNames[value]) {
+        this.removeFields = removeFieldNames[value];
+        this.formInputs = this.generateFields();
       }
     },
     onSelectChange(value) {

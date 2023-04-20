@@ -15,78 +15,13 @@
             v-for="dataItem in data"
             v-bind:key="dataItem.fieldData?.placeholder"
           >
-            <!-- Actions -->
             <div class="">
-              <div class="flex justify-end">
-                <div
-                  v-if="field.avilaction.schedule"
-                  class="cursor-pointer mr-3"
-                  @click="
-                    () =>
-                      actionHandler(
-                        field.avilaction.schedule,
-                        {},
-                        {
-                          id: dataItem.payload.id,
-                          payload: {},
-                        }
-                      )
-                  "
-                >
-                  <Icon :icon="field.avilaction.schedule.icon" />
-                </div>
-                <div
-                  v-if="field.avilaction.search"
-                  class="cursor-pointer mr-3"
-                  @click="
-                    () =>
-                      actionHandler(
-                        field.avilaction.search,
-                        {},
-                        {
-                          id: dataItem.payload.id,
-                          payload: {},
-                        }
-                      )
-                  "
-                >
-                  <Icon :icon="field.avilaction.search.icon" />
-                </div>
-                <div
-                  v-if="field.avilaction.edit"
-                  class="cursor-pointer mr-3"
-                  @click="
-                    () =>
-                      actionHandler(field.avilaction.edit, dataItem.fieldData, {
-                        id: field.avilaction.add
-                          ? dataItem.payload.id
-                          : dataItem.payload.refId,
-                        payload: dataItem.payload,
-                      })
-                  "
-                >
-                  <Icon :icon="field.avilaction.edit.icon" />
-                </div>
-                <div
-                  v-if="field.avilaction.delete"
-                  class="cursor-pointer mr-3"
-                  @click="
-                    () =>
-                      actionHandler(
-                        field.avilaction.delete,
-                        dataItem.fieldData,
-                        {
-                          id: field.avilaction.add
-                            ? dataItem.payload.id
-                            : dataItem.payload.refId,
-                          payload: dataItem.payload,
-                        }
-                      )
-                  "
-                >
-                  <Icon :icon="field.avilaction.delete.icon" />
-                </div>
-              </div>
+              <!-- Actions -->
+              <DataAction
+                :data="dataItem"
+                :actionHandler="actionHandler"
+                :availableAction="field.avilaction"
+              />
               <div class="grid grid-cols-4 gap-4">
                 <DataItem
                   v-for="key in field.fieldName"
@@ -111,20 +46,18 @@
 
 <script>
 import DataItem from "./DataItem.vue";
-import { deleteClient, getClient } from "@/utils/client";
+import { deleteClient, getClient } from "@/utils/http/client";
 import Button from "./Button.vue";
-import Icon from "./Icon.vue";
 import FetchLayout from "./FetchLayout.vue";
 import { actions } from "@/utils/form/formAction";
-import {
-  mainFieldName,
-  getFieldValuesFromApi,
-  convertToArray,
-} from "@/utils/helper";
+import { convertToArray } from "@/utils/helper";
+import { mainFieldName } from "@/utils/tabs/index";
 import { formField } from "@/store/storeActions";
 import { message } from "ant-design-vue/lib";
 import { forms } from "@/utils/form/formName";
 import { schedulerFiled, schedulerFiledName } from "@/utils/form/scheduler";
+import { getArrayOfFieldFromApi } from "@/utils/http/resDataConversion";
+import DataAction from "./DataAction.vue";
 export default {
   name: "DataComponent",
   inject: ["changeForm", "id"],
@@ -146,6 +79,18 @@ export default {
     },
   },
   methods: {
+    getEndUrl(option) {
+      if (
+        this.parentFieldName === mainFieldName.getAssetDiscoveryFields &&
+        option.payload?.id
+      ) {
+        return "/" + option.payload.id;
+      }
+      if (option?.id && this.field.avilaction.add) {
+        return "/" + option.id;
+      }
+      return "";
+    },
     async deleteData(url) {
       try {
         await deleteClient(url);
@@ -164,57 +109,50 @@ export default {
         message.error(error.response?.data?.message || error.message);
       }
     },
-    async actionHandler(
+    async addScheduler(id) {
+      try {
+        const res = await getClient(`networkScan/${id}/addScheduler`);
+        const data = getArrayOfFieldFromApi(
+          [res.data],
+          schedulerFiled,
+          convertToArray(schedulerFiledName)
+        );
+        this.changeForm(
+          forms.SCHEDULE,
+          data[0].fieldData,
+          actions.edit,
+          { payload: data[0].payload },
+          `networkScan/${id}/addScheduler/${data[0].payload.id}`,
+          () => {}
+        );
+      } catch (error) {
+        console.log("Scheduler Already Exist", error);
+        this.changeForm(
+          forms.SCHEDULE,
+          schedulerFiled,
+          actions.add,
+          {},
+          `networkScan/${id}/addScheduler`,
+          () => {}
+        );
+      }
+    },
+    actionHandler(
       action = actions.add,
       data = this.field.fieldData,
       option = {}
     ) {
+      let url = this.field.url + this.getEndUrl(option);
       if (action.placeholder === actions.schedule.placeholder) {
-        try {
-          const res = await getClient(`networkScan/${option.id}/addScheduler`);
-
-          const data = getFieldValuesFromApi(
-            [res.data],
-            schedulerFiled,
-            convertToArray(schedulerFiledName)
-          );
-          this.changeForm(
-            forms.SCHEDULE,
-            data[0].fieldData,
-            actions.edit,
-            { payload: data[0].payload },
-            `networkScan/${option.id}/addScheduler`,
-            () => {}
-          );
-        } catch (error) {
-          console.log("Scheduler Error", error);
-          this.changeForm(
-            forms.SCHEDULE,
-            schedulerFiled,
-            actions.add,
-            {},
-            `networkScan/${option.id}/addScheduler`,
-            () => {}
-          );
-        }
+        this.addScheduler(option.id);
         return;
       }
       if (action.placeholder === actions.search.placeholder) {
         this.scanNetwork(option.id);
         return;
       }
-      let end = "";
-      if (
-        this.parentFieldName === mainFieldName.getAssetDiscoveryFields &&
-        option.payload?.id
-      ) {
-        end = "/" + option.payload.id;
-      }
-      if (option?.id && this.field.avilaction.add) {
-        end = "/" + option.id;
-      }
       if (action.actionType === actions.delete.actionType) {
-        this.deleteData(this.field.url + end);
+        this.deleteData(url);
         return;
       }
       this.changeForm(
@@ -222,7 +160,7 @@ export default {
         data,
         action,
         option,
-        this.field.url + end,
+        url,
         this.fetchData
       );
     },
@@ -253,6 +191,6 @@ export default {
     this.initState();
   },
   destroyed() {},
-  components: { DataItem, Button, Icon, FetchLayout },
+  components: { DataItem, Button, FetchLayout, DataAction },
 };
 </script>

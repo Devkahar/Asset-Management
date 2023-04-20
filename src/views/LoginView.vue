@@ -27,10 +27,10 @@ import { Error } from "@/utils/helper";
 import Form from "@/components/Form.vue";
 import Link from "@/components/Link.vue";
 import Logo from "@/components/Logo.vue";
-import { loginValidation } from "@/utils/authValidation";
+import { loginValidation } from "@/utils/form/authValidation";
 import { ROUTE } from "@/utils/constants";
 import { message } from "ant-design-vue/lib";
-import { postClient } from "@/utils/client";
+import { postClient } from "@/utils/http/client";
 import Alert from "@/components/Alert.vue";
 
 export default {

@@ -1,6 +1,6 @@
 // Computer Property Form
 
-import { capitalize, generateValidation } from "../generalFields";
+import { capitalize, generateValidation } from "./generalFields";
 import { osArchitectureField, partOfDomainField } from "./commonField";
 
 export const computerPropertyFieldName = {

@@ -1,16 +1,16 @@
 <template>
   <div class="">
     <h1 class="text-1xl">{{ title }}</h1>
-    <div class="flex">
+    <div class="flex items-center">
       <div class="flex" v-if="!edit">
         <p class="mr-2">{{ disVal }}</p>
         <div class="cursor-pointer" @click="toggleEdit">
           <Icon :icon="editIcon" />
         </div>
       </div>
-      <div class="flex" v-else>
+      <div class="flex items-center" v-else>
         <a-input v-model="newValue" :pressEnter="submitHandler" />
-        <div class="">
+        <div class="ml-2">
           <div class="cursor-pointer" @click="toggleEdit">
             <Icon :icon="closeIcon" />
           </div>
@@ -30,7 +30,7 @@
 <script>
 import Icon from "./Icon.vue";
 import Icons from "@/utils/iconPath";
-import { patchClient } from "@/utils/client";
+import { patchClient } from "@/utils/http/client";
 import { message } from "ant-design-vue/lib";
 export default {
   name: "EditAsset",

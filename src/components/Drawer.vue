@@ -49,7 +49,7 @@ import Button from "@/components/Button.vue";
 import DrawerForm from "@/components/DrawerForm.vue";
 import { appForms } from "@/utils/form/form";
 import { actions } from "@/utils/form/formAction";
-import { putClient, postClient, patchClient } from "@/utils/client";
+import { putClient, postClient, patchClient } from "@/utils/http/client";
 import { message } from "ant-design-vue/lib";
 import { clientAction } from "@/utils/constants";
 export default {
@@ -116,17 +116,15 @@ export default {
         let res;
         if (this.action.actionType === clientAction.putClient) {
           res = await putClient(this.url, body);
+          message.success("Edited Successfully");
         }
         if (this.action.actionType === clientAction.patchClient) {
           res = await patchClient(this.url, body);
+          message.success("Edited Successfully");
         }
         if (this.action.actionType === clientAction.postClient) {
           res = await postClient(this.url, body);
-          message.success("Credential Addded");
-        }
-        if (this.action.actionType === clientAction.deleteClient) {
-          console.log(res);
-          console.log(this.url);
+          message.success("Added Successfully");
         }
         this.loading = false;
         console.log(res);

@@ -1,4 +1,4 @@
-import { descisionOption, osArchitectureOption } from "../options";
+import { descisionOption, osArchitectureOption } from "./options";
 
 export const descriptionFiled = {
   placeholder: "Description",

@@ -7,10 +7,10 @@
     <p>{{ email }}</p>
     <div class="flex">
       <div class="mr-3">
-        <Button shape="round"> Edit Profile </Button>
+        <Button> Edit Profile </Button>
       </div>
       <Logout v-slot:default="{ logout }">
-        <Button shape="round" :click="logout"> Log Out </Button>
+        <Button :click="logout" :type="'danger'"> Log Out </Button>
       </Logout>
     </div>
   </div>

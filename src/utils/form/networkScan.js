@@ -1,6 +1,6 @@
-import { capitalize, generateValidation } from "../generalFields";
-import { ipRangeOptions } from "../options";
-import { ipAddressRules, requiredRule } from "../rules";
+import { capitalize, generateValidation } from "./generalFields";
+import { ipRangeOptions } from "./options";
+import { ipAddressRules, requiredRule } from "./rules";
 // Processor
 export const networkDiscoveryFieldNames = {
   name: "name",
@@ -8,7 +8,7 @@ export const networkDiscoveryFieldNames = {
   // discoveryScan: "scanType",
   ipRangeStart: "ipRangeStart",
   ipList: "ipList",
-  credentials: "refIds",
+  credentials: "credentialId",
 };
 
 export const networkDiscoveryRemoveFields = {
@@ -40,7 +40,7 @@ export const networkDiscoveryFields = {
     placeholder: "Credentials",
     initialValue: [],
     type: "fetchList",
-    rules: [],
+    rules: [...requiredRule],
   },
   [networkDiscoveryFieldNames.ipList]: {
     placeholder: "Set Of IP",

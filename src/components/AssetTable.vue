@@ -31,12 +31,15 @@
 </template>
 
 <script>
-import { getClient } from "@/utils/client";
-import { hardWareAssetColumn, generateHardWareAssetData } from "@/utils/helper";
+import { getClient } from "@/utils/http/client";
+import {
+  hardWareAssetColumn,
+  generateHardWareAssetData,
+} from "@/utils/table/hardwareAssetTable";
 import Link from "./Link.vue";
 
 export default {
-  name: "DisplayAssets",
+  name: "AssetTable",
   data() {
     return {
       columns: hardWareAssetColumn,

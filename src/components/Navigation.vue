@@ -4,6 +4,10 @@
       <Logo />
     </div>
     <div class="flex">
+      <!-- Hardware Asset Link -->
+      <div class="mr-3 flex items-center">
+        <Link :path="hardwareAssetLink"> Hardware Asset </Link>
+      </div>
       <!-- Asset Discovery Link -->
       <div class="mr-3 flex items-center">
         <Link :path="assetDiscoveryLink"> Asset Discovery </Link>
@@ -43,6 +47,7 @@ export default {
     return {
       plus: Icons.plus,
       assetDiscoveryLink: ROUTE.ASSET_DISCOVERY.path,
+      hardwareAssetLink: ROUTE.HOME.path,
       name: this.$store.getters.name[0],
     };
   },

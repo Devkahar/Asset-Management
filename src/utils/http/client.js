@@ -1,7 +1,7 @@
 import router from "@/router";
 import store from "@/store";
 import axios from "axios";
-import { ROUTE } from "./constants";
+import { ROUTE } from "../constants";
 // import { BASE_URL } from "./constants";
 
 const ErrorAction = (code) => {

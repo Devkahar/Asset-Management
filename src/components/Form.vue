@@ -24,7 +24,12 @@
         </a-input>
       </a-form-item>
     </div>
-    <Button :click="handleSubmit" :loading="loading" :block="true">
+    <Button
+      :click="handleSubmit"
+      :loading="loading"
+      :block="true"
+      :htmlType="'submit'"
+    >
       {{ buttonName }}
     </Button>
   </a-form>
@@ -47,7 +52,6 @@ export default {
   },
   created() {
     this.formInputs = this.validate.call(this.form);
-    console.log("Form Inputs ", this.formInputs, this.validate);
   },
   methods: {
     handleSubmit(e) {

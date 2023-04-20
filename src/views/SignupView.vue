@@ -28,9 +28,9 @@ import Form from "@/components/Form.vue";
 import Link from "@/components/Link.vue";
 import Alert from "@/components/Alert.vue";
 import Logo from "@/components/Logo.vue";
-import { signupValidation } from "@/utils/authValidation";
+import { signupValidation } from "@/utils/form/authValidation";
 import { ROUTE } from "@/utils/constants";
-import { postClient } from "@/utils/client";
+import { postClient } from "@/utils/http/client";
 import { message } from "ant-design-vue/lib";
 
 export default {

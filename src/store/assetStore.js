@@ -1,4 +1,4 @@
-import { getClient } from "@/utils/client";
+import { getClient } from "@/utils/http/client";
 import { assetField, assetFieldName } from "@/utils/form/asset";
 
 const assetStore = {

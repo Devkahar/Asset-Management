@@ -1,15 +1,16 @@
 // RAM
 
-import { capitalize, generateValidation } from "../generalFields";
-import { monthOption, schedulerOption, weekOptions } from "../options";
-import { requiredRule } from "../rules";
+import { capitalize, generateValidation } from "./generalFields";
+import { monthOption, schedulerOption, weekOptions } from "./options";
+import { requiredRule } from "./rules";
 
 export const schedulerFiledName = {
   scheduleType: "scanType",
   startAt: "startTime",
-  day: "day",
+  day: "week",
   time: "time",
   month: "month",
+  interval: "interval",
 };
 
 export const schedulerRemoveFields = {
@@ -18,13 +19,27 @@ export const schedulerRemoveFields = {
     schedulerFiledName.day,
     schedulerFiledName.time,
     schedulerFiledName.month,
+    schedulerFiledName.interval,
   ],
   //daily
-  [schedulerOption[1].id]: [schedulerFiledName.day, schedulerFiledName.month],
+  [schedulerOption[1].id]: [
+    schedulerFiledName.day,
+    schedulerFiledName.month,
+    schedulerFiledName.interval,
+  ],
   // weekly
-  [schedulerOption[2].id]: [schedulerFiledName.month],
+  [schedulerOption[2].id]: [
+    schedulerFiledName.month,
+    schedulerFiledName.interval,
+  ],
   // monthly
-  [schedulerOption[3].id]: [],
+  [schedulerOption[3].id]: [schedulerFiledName.interval],
+  // interval
+  [schedulerOption[4].id]: [
+    schedulerFiledName.day,
+    schedulerFiledName.time,
+    schedulerFiledName.month,
+  ],
 };
 export const schedulerFiled = {
   [schedulerFiledName.scheduleType]: {
@@ -59,6 +74,13 @@ export const schedulerFiled = {
     options: monthOption,
     rules: [...requiredRule],
     type: "option",
+  },
+  [schedulerFiledName.interval]: {
+    placeholder: "Interval",
+    initialValue: 300000,
+    rules: [],
+    type: "number",
+    suffix: "min",
   },
 };
 

@@ -1,4 +1,4 @@
-import { generateValidation } from "../generalFields";
+import { generateValidation } from "./generalFields";
 import {
   // connectionStatusField,
   // descisionField,

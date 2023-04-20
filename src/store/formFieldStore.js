@@ -1,13 +1,10 @@
-import { getClient } from "@/utils/client";
+import { getClient } from "@/utils/http/client";
 import { credentialFieldName } from "@/utils/form/credential";
 import { subFieldsName } from "@/utils/form/formName";
 import { networkDiscoveryFieldNames } from "@/utils/form/networkScan";
-import {
-  getFieldValuesFromApi,
-  mainField,
-  mainFieldName,
-} from "@/utils/helper";
 import { formField } from "@/store/storeActions";
+import { mainFieldName, mainField } from "@/utils/tabs";
+import { getArrayOfFieldFromApi } from "@/utils/http/resDataConversion";
 const convertToArray = (obj) => {
   return Object.entries(obj).map((el) => el[1]);
 };
@@ -85,7 +82,7 @@ const formFieldStore = {
         commit(formField.mutations.fieldLoading, { loading: false });
         const resData = res.data;
         console.log("Store Fetch", resData);
-        const data = getFieldValuesFromApi(
+        const data = getArrayOfFieldFromApi(
           resData,
           this.getters.field.fieldData,
           this.getters.field.fieldName,

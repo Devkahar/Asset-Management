@@ -80,6 +80,10 @@ export const schedulerOption = [
     id: "MONTHLY",
     value: "Monthly",
   },
+  {
+    id: "INTERVAL",
+    value: "Interval",
+  },
 ];
 
 export const monthOption = [
@@ -88,8 +92,8 @@ export const monthOption = [
     value: "January",
   },
   {
-    id: "FEBURARY",
-    value: "Feburary",
+    id: "FEBRUARY",
+    value: "February",
   },
   {
     id: "MARCH",

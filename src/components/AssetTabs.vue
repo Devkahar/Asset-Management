@@ -25,9 +25,10 @@
 
 <script>
 import Data from "@/components/Data.vue";
-import { mainFieldName } from "@/utils/helper";
+import { mainFieldName } from "@/utils/tabs";
+
 export default {
-  name: "AssetView",
+  name: "AssetTabs",
   data() {
     return {
       list: this.getArray(this.fields),

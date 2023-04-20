@@ -27,15 +27,13 @@
 
 <script>
 import AssetItem from "@/components/AssetItem.vue";
-import AssetsTabs from "@/components/AssetsTabs.vue";
+import AssetsTabs from "@/components/AssetTabs.vue";
 import EditAsset from "@/components/EditAsset.vue";
 import FetchLayout from "@/components/FetchLayout.vue";
 import PageBack from "@/components/PageBack.vue";
 import PageTitle from "@/components/PageTitle.vue";
-// import { getClient } from "@/utils/client";
-// import { assetField, assetFieldName } from "@/utils/form/asset";
 import { subFieldsName } from "@/utils/form/formName";
-import { assetFields } from "@/utils/helper";
+import { assetFields } from "@/utils/tabs/assetTabs";
 export default {
   name: "AssetView",
   data() {
