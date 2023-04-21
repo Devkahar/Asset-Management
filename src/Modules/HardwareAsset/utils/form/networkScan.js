@@ -1,6 +1,6 @@
-import { capitalize, generateValidation } from "./generalFields";
-import { ipRangeOptions } from "./options";
-import { ipAddressRules, requiredRule } from "./rules";
+import { capitalize, generateValidation } from "@/utils/form/generalFields";
+import { ipRangeOptions } from "@/utils/form/options";
+import { ipAddressRules, requiredRule } from "@/utils/form/rules";
 // Processor
 export const networkDiscoveryFieldNames = {
   name: "name",

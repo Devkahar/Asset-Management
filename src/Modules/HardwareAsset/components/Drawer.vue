@@ -19,10 +19,32 @@
           :validate="fields"
           :successHandler="formSubmitHandler"
           :init="formInit"
+          :testConnection="getTestConnecitonValues"
           v-if="visible"
         >
-          <template v-slot:footer="{ sumbitHandler }">
+          <template v-slot:footer="{ sumbitHandler, dummySubmit }">
             <div class="flex justify-end">
+              <div class="mr-2" v-if="showTest">
+                <a-popover v-model="showIp" title="Ip Address" trigger="click">
+                  <a slot="content">
+                    <div class="flex items-center">
+                      <a-input v-model="ipAddress" />
+                      <div class="ml-2">
+                        <div class="cursor-pointer" @click="testConnection">
+                          <Icon :icon="checkIcon" />
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  <Button
+                    shape="round"
+                    :click="dummySubmit"
+                    htmlType="button"
+                    :loading="testConnectionLoading"
+                    >Test</Button
+                  >
+                </a-popover>
+              </div>
               <div class="mr-2">
                 <Button
                   shape="round"
@@ -46,12 +68,14 @@ import Icon from "@/components/Icon.vue";
 import PageTitle from "@/components/PageTitle.vue";
 import Icons from "@/utils/iconPath";
 import Button from "@/components/Button.vue";
-import { appForms } from "@/utils/form/form";
-import { actions } from "@/utils/form/formAction";
+import { appForms } from "@/Modules/HardwareAsset/utils/form/form";
+import { actions } from "@/Modules/HardwareAsset/utils/form/formAction";
 import { putClient, postClient, patchClient } from "@/utils/http/client";
 import { message } from "ant-design-vue/lib";
 import { clientAction } from "@/utils/constants";
 import DrawerForm from "./DrawerForm.vue";
+import { forms } from "../utils/form/formName";
+
 export default {
   name: "DrawerComponent",
   data() {
@@ -60,6 +84,11 @@ export default {
       close: Icons.close,
       loading: false,
       form: null,
+      testConnectionLoading: false,
+      connectionPayload: {},
+      ipAddress: "",
+      showIp: false,
+      checkIcon: Icons.check,
     };
   },
   computed: {
@@ -71,6 +100,9 @@ export default {
     },
     fields() {
       return appForms[this.formName].validation;
+    },
+    showTest() {
+      return this.formName === forms.ADD_CREDENTIAL;
     },
   },
   inject: {
@@ -134,6 +166,28 @@ export default {
         console.log(error);
         this.loading = false;
         message.error(error.message);
+      }
+    },
+    getTestConnecitonValues(values) {
+      this.connectionPayload = values;
+    },
+    async testConnection() {
+      try {
+        this.showIp = false;
+        message.success("Testing Connection");
+        const res = await postClient("credentials/testConnection", {
+          ...this.connectionPayload,
+          ipAddress: this.ipAddress,
+        });
+
+        if (res.data) {
+          message.success("Connection Successfull");
+        } else {
+          message.error("Connection UnSuccessfull");
+        }
+        this.ipAddress = "";
+      } catch (error) {
+        message.error("Connection UnSuccessfull");
       }
     },
     formInit(form) {

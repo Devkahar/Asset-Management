@@ -1,5 +1,5 @@
-import { networkDiscoveryRemoveFields } from "./form/networkScan";
-import { schedulerRemoveFields } from "./form/scheduler";
+import { networkDiscoveryRemoveFields } from "@/Modules/HardwareAsset/utils/form/networkScan";
+import { schedulerRemoveFields } from "@/Modules/HardwareAsset/utils/form/scheduler";
 
 export class Error {
   title = "";

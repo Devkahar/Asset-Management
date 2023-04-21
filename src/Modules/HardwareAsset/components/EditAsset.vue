@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { assetFieldName } from "@/utils/form/asset";
+import { assetFieldName } from "@/Modules/HardwareAsset/utils/form/asset";
 import EditAssetItem from "./EditAssetItem.vue";
 
 export default {

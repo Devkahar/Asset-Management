@@ -1,9 +1,9 @@
 import { getClient } from "@/utils/http/client";
-import { credentialFieldName } from "@/utils/form/credential";
-import { subFieldsName } from "@/utils/form/formName";
-import { networkDiscoveryFieldNames } from "@/utils/form/networkScan";
+import { credentialFieldName } from "@/Modules/HardwareAsset/utils/form/credential";
+import { subFieldsName } from "@/Modules/HardwareAsset/utils/form/formName";
+import { networkDiscoveryFieldNames } from "@/Modules/HardwareAsset/utils/form/networkScan";
 import { formField } from "@/store/storeActions";
-import { mainFieldName, mainField } from "@/utils/tabs";
+import { mainFieldName, mainField } from "@/Modules/HardwareAsset/utils/tabs";
 import { getArrayOfFieldFromApi } from "@/utils/http/resDataConversion";
 const convertToArray = (obj) => {
   return Object.entries(obj).map((el) => el[1]);
@@ -95,6 +95,15 @@ const formFieldStore = {
         commit(formField.mutations.fieldError, { error: Error(error) });
         commit(formField.mutations.fieldLoading, { loading: false });
       }
+    },
+    [formField.actions.setFieldDataFromResponse]({ commit, state }, payload) {
+      const data = getArrayOfFieldFromApi(
+        payload.data,
+        this.getters.field.fieldData,
+        this.getters.field.fieldName,
+        state.hideFields
+      );
+      commit(formField.mutations.setFieldData, { data });
     },
     [formField.actions.destroy]({ state }) {
       state.isActive = false;

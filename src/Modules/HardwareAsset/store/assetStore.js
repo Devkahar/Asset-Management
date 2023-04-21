@@ -1,5 +1,8 @@
 import { getClient } from "@/utils/http/client";
-import { assetField, assetFieldName } from "@/utils/form/asset";
+import {
+  assetField,
+  assetFieldName,
+} from "@/Modules/HardwareAsset/utils/form/asset";
 import { message } from "ant-design-vue/lib";
 import { ROUTE } from "@/utils/constants";
 import router from "@/router";

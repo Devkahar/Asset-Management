@@ -1,8 +1,12 @@
 // RAM
 
-import { capitalize, generateValidation } from "./generalFields";
-import { monthOption, schedulerOption, weekOptions } from "./options";
-import { requiredRule } from "./rules";
+import { capitalize, generateValidation } from "@/utils/form/generalFields";
+import {
+  monthOption,
+  schedulerOption,
+  weekOptions,
+} from "@/utils/form/options";
+import { requiredRule } from "@/utils/form/rules";
 
 export const schedulerFiledName = {
   scheduleType: "scanType",

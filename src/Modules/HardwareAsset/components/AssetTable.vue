@@ -35,9 +35,8 @@ import { getClient } from "@/utils/http/client";
 import {
   hardWareAssetColumn,
   generateHardWareAssetData,
-} from "@/utils/table/hardwareAssetTable";
+} from "@/Modules/HardwareAsset/utils/table/hardwareAssetTable";
 import Link from "../../../components/Link.vue";
-
 export default {
   name: "AssetTable",
   data() {

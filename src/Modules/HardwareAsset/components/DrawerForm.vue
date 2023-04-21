@@ -80,7 +80,11 @@
         </a-form-item>
       </div>
     </div>
-    <slot name="footer" :default="{ handleSubmit, resetForm }"> </slot>
+    <slot
+      name="footer"
+      v-bind="{ handleSubmit: handleSubmit, dummySubmit: this.dummySubmit }"
+    >
+    </slot>
   </a-form>
 </template>
 
@@ -88,9 +92,9 @@
 import { getClient } from "@/utils/http/client";
 import { generateKey } from "@/utils/form/generalFields";
 import { message } from "ant-design-vue/lib";
-import { networkDiscoveryFieldNames } from "@/utils/form/networkScan";
+import { networkDiscoveryFieldNames } from "@/Modules/HardwareAsset/utils/form/networkScan";
 import { cloneDeep } from "lodash";
-import { actions } from "@/utils/form/formAction";
+import { actions } from "@/Modules/HardwareAsset/utils/form/formAction";
 import { removeFieldNames } from "@/utils/helper";
 import {
   getFrequencyString,
@@ -98,7 +102,7 @@ import {
   convertToHz,
   getByteString,
 } from "@/utils/conversion";
-import { schedulerFiledName } from "@/utils/form/scheduler";
+import { schedulerFiledName } from "@/Modules/HardwareAsset/utils/form/scheduler";
 import moment from "moment";
 let fields;
 export default {
@@ -271,10 +275,21 @@ export default {
         }
       });
     },
+    dummySubmit(e) {
+      e.preventDefault();
+      console.log("Hit Dummy");
+      this.form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          console.log("Form Values ", values);
+          this.testConnection(values);
+        }
+      });
+    },
     resetForm(e) {
       e.preventDefault();
       console.log(this.form);
     },
+
     switchField(value) {
       console.log("Value ", value, " remove ", removeFieldNames[value]);
 
@@ -302,6 +317,10 @@ export default {
       default: () => {},
     },
     successHandler: {
+      type: Function,
+      required: true,
+    },
+    testConnection: {
       type: Function,
       required: true,
     },

@@ -1,12 +1,18 @@
-import { credentialField, credentialFieldName } from "../form/credential";
-import { capitalize } from "../form/generalFields";
-import { actions } from "../form/formAction";
-import { assetDiscoveryFieldsName, forms } from "../form/formName";
+import {
+  credentialField,
+  credentialFieldName,
+} from "@/Modules/HardwareAsset/utils/form/credential";
+import { capitalize } from "@/utils/form/generalFields";
+import { actions } from "@/Modules/HardwareAsset/utils/form/formAction";
+import {
+  assetDiscoveryFieldsName,
+  forms,
+} from "@/Modules/HardwareAsset/utils/form/formName";
 import { generateAssetField } from "./assetTabs";
 import {
   networkDiscoveryFieldNames,
   networkDiscoveryFields,
-} from "../form/networkScan";
+} from "@/Modules/HardwareAsset/utils/form/networkScan";
 
 export const assetDiscoveryField = {
   [assetDiscoveryFieldsName.credentials]: {
@@ -27,7 +33,7 @@ export const getAssetDiscoveryFields = {
   [assetDiscoveryFieldsName.credentials]: {
     fieldData: { ...credentialField },
     fieldName: credentialFieldName,
-    actions: { edit: actions.edit, delete: actions.delete },
+    actions: { add: actions.add, edit: actions.edit, delete: actions.delete },
     formName: forms.ADD_CREDENTIAL,
     url: "credentials",
   },

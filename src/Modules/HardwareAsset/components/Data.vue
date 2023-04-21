@@ -47,13 +47,19 @@
 <script>
 import DataItem from "./DataItem.vue";
 import { deleteClient, getClient } from "@/utils/http/client";
-import { actions } from "@/utils/form/formAction";
+import { actions } from "@/Modules/HardwareAsset/utils/form/formAction";
 import { convertToArray } from "@/utils/helper";
-import { mainFieldName } from "@/utils/tabs/index";
+import { mainFieldName } from "@/Modules/HardwareAsset/utils/tabs/index";
 import { formField } from "@/store/storeActions";
 import { message } from "ant-design-vue/lib";
-import { forms } from "@/utils/form/formName";
-import { schedulerFiled, schedulerFiledName } from "@/utils/form/scheduler";
+import {
+  assetDiscoveryFieldsName,
+  forms,
+} from "@/Modules/HardwareAsset/utils/form/formName";
+import {
+  schedulerFiled,
+  schedulerFiledName,
+} from "@/Modules/HardwareAsset/utils/form/scheduler";
 import { getArrayOfFieldFromApi } from "@/utils/http/resDataConversion";
 import DataAction from "./DataAction.vue";
 import Button from "@/components/Button.vue";
@@ -75,6 +81,14 @@ export default {
     },
     data() {
       return this.$store.state.formFieldState.data;
+    },
+    showAdd() {
+      if (
+        this.parentFieldName === assetDiscoveryFieldsName.credentials ||
+        this.parentFieldName === assetDiscoveryFieldsName.networkScan
+      )
+        return true;
+      return false;
     },
   },
   methods: {

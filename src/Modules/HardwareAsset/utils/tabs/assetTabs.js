@@ -1,35 +1,60 @@
-import { biosFieldName, biosFiled } from "../form/bios";
-import { generateKey, capitalize } from "../form/generalFields";
+import {
+  biosFieldName,
+  biosFiled,
+} from "@/Modules/HardwareAsset/utils/form/bios";
+import { generateKey, capitalize } from "@/utils/form/generalFields";
 import {
   computerPropertyField,
   computerPropertyFieldName,
-} from "../form/computerProperty";
+} from "@/Modules/HardwareAsset/utils/form/computerProperty";
 import {
   computerSystemField,
   computerSystemFieldName,
-} from "../form/computerSystem";
-import { actions } from "../form/formAction";
-import { assetFieldsName, forms, subFieldsName } from "../form/formName";
+} from "@/Modules/HardwareAsset/utils/form/computerSystem";
+import { actions } from "@/Modules/HardwareAsset/utils/form/formAction";
+import {
+  assetFieldsName,
+  forms,
+  subFieldsName,
+} from "@/Modules/HardwareAsset/utils/form/formName";
 import {
   hardWarePropertyField,
   hardWarePropertyFieldName,
-} from "../form/hardwareProperty";
-import { osField, osFieldName } from "../form/os";
-import { ramField, ramFieldName } from "../form/ram";
-import { processorField, processorFieldName } from "../form/processor";
-import { motherboardField, motherboardFieldName } from "../form/motherboard";
-import { physicalDiskField, physicalDiskFieldName } from "../form/physicalDisk";
-import { logicalDiskField, logicalDiskFieldName } from "../form/logicalDisk";
-import { monitorField, monitorFieldName } from "../form/monitor";
-import { keyboardField, keyboardFieldName } from "../form/keyboard";
+} from "@/Modules/HardwareAsset/utils/form/hardwareProperty";
+import { osField, osFieldName } from "@/Modules/HardwareAsset/utils/form/os";
+import { ramField, ramFieldName } from "@/Modules/HardwareAsset/utils/form/ram";
+import {
+  processorField,
+  processorFieldName,
+} from "@/Modules/HardwareAsset/utils/form/processor";
+import {
+  motherboardField,
+  motherboardFieldName,
+} from "@/Modules/HardwareAsset/utils/form/motherboard";
+import {
+  physicalDiskField,
+  physicalDiskFieldName,
+} from "@/Modules/HardwareAsset/utils/form/physicalDisk";
+import {
+  logicalDiskField,
+  logicalDiskFieldName,
+} from "@/Modules/HardwareAsset/utils/form/logicalDisk";
+import {
+  monitorField,
+  monitorFieldName,
+} from "@/Modules/HardwareAsset/utils/form/monitor";
+import {
+  keyboardField,
+  keyboardFieldName,
+} from "@/Modules/HardwareAsset/utils/form/keyboard";
 import {
   pointingDeviceField,
   pointingDeviceFieldName,
-} from "../form/pointingDevice";
+} from "@/Modules/HardwareAsset/utils/form/pointingDevice";
 import {
   networkAdapterField,
   networkAdapterFieldName,
-} from "../form/networkAdapter";
+} from "@/Modules/HardwareAsset/utils/form/networkAdapter";
 
 // Asset Fields
 export const generateAssetField = (key, title) => {
@@ -194,14 +219,14 @@ export const getAssetFileds = {
   [subFieldsName.pointingDevice]: {
     fieldData: pointingDeviceField,
     fieldName: pointingDeviceFieldName,
-    actions: { edit: actions.edit, delete: actions.delete },
+    actions: { add: actions.add, edit: actions.edit, delete: actions.delete },
     formName: forms.POINTING_DEVICE,
     url: "pointingDevices",
   },
   [subFieldsName.networkAdapter]: {
     fieldData: networkAdapterField,
     fieldName: networkAdapterFieldName,
-    actions: { edit: actions.edit, delete: actions.delete },
+    actions: { add: actions.add, edit: actions.edit, delete: actions.delete },
     formName: forms.NETWORK_ADAPTER,
     url: "networkAdapter",
   },

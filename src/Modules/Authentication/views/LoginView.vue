@@ -26,7 +26,7 @@ import IconsName from "@/utils/iconPath.js";
 import { Error } from "@/utils/helper";
 import Link from "@/components/Link.vue";
 import Logo from "@/components/Logo.vue";
-import { loginValidation } from "@/utils/form/authValidation";
+import { loginValidation } from "@/Modules/Authentication/utils/forms/authValidation";
 import { ROUTE } from "@/utils/constants";
 import { message } from "ant-design-vue/lib";
 import { postClient } from "@/utils/http/client";

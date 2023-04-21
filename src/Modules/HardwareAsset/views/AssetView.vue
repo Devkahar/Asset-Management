@@ -32,8 +32,8 @@ import EditAsset from "@/Modules/HardwareAsset/components/EditAsset.vue";
 import FetchLayout from "@/components/FetchLayout.vue";
 import PageBack from "@/components/PageBack.vue";
 import PageTitle from "@/components/PageTitle.vue";
-import { subFieldsName } from "@/utils/form/formName";
-import { assetFields } from "@/utils/tabs/assetTabs";
+import { subFieldsName } from "@/Modules/HardwareAsset/utils/form/formName";
+import { assetFields } from "@/Modules/HardwareAsset/utils/tabs/assetTabs";
 export default {
   name: "AssetView",
   data() {

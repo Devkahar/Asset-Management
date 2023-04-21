@@ -3,6 +3,7 @@ export const formField = {
     setFieldInitState: "setFieldInitState",
     fetchFieldData: "fetchFieldData",
     destroy: "destroy",
+    setFieldDataFromResponse: "setFieldDataFromResponse",
   },
   mutations: {
     fieldLoading: "fieldLoading",

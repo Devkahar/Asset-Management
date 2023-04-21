@@ -1,4 +1,4 @@
-import { capitalize, generateValidation } from "./generalFields";
+import { capitalize, generateValidation } from "@/utils/form/generalFields";
 
 export const assetFieldName = {
   assetType: "assetType",

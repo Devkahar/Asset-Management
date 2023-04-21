@@ -1,4 +1,4 @@
-import { capitalize, generateValidation } from "./generalFields";
+import { capitalize, generateValidation } from "@/utils/form/generalFields";
 import { dateField, osArchitectureField } from "./commonField";
 
 // OS
@@ -6,7 +6,7 @@ export const osFieldName = {
   // manufacturer: "manufacturer",
   OSName: "osName",
   OSVersion: "osVersion",
-  OSArchitecture: "osArchitecture",
+  OSArchitecture: "architecture",
   // licenseKey: "licenseKey",
   // activationStatus: "activationStatus",
   installedDate: "installedDate",

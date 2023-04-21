@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mainFieldName } from "@/utils/tabs";
+import { mainFieldName } from "@/Modules/HardwareAsset/utils/tabs/index";
 import Data from "./Data.vue";
 
 export default {

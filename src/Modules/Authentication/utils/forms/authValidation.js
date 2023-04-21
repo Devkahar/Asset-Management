@@ -1,6 +1,6 @@
-import { createField } from "./generalFields";
-import Icons from "../iconPath";
-import { emailRules, passwordRules, userNameRule } from "./rules";
+import { createField } from "@/utils/form/generalFields";
+import Icons from "@/utils/iconPath";
+import { emailRules, passwordRules, userNameRule } from "@/utils/form/rules";
 
 export const loginValidation = function () {
   return [

@@ -12,9 +12,9 @@
 
 <script>
 import Navigation from "@/components/Navigation.vue";
-import { forms } from "@/utils/form/formName";
+import { forms } from "@/Modules/HardwareAsset/utils/form/formName";
 import { computed } from "vue";
-import { actions } from "@/utils/form/formAction";
+import { actions } from "@/Modules/HardwareAsset/utils/form/formAction";
 import Drawer from "@/Modules/HardwareAsset/components/Drawer.vue";
 export default {
   name: "HomeLayout",

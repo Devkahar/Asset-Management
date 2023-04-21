@@ -9,16 +9,12 @@
         </div>
       </div>
       <div class="flex items-center" v-else>
-        <a-input v-model="newValue" :pressEnter="submitHandler" />
+        <a-input v-model="newValue" @keyup="submitHandler" />
         <div class="ml-2">
           <div class="cursor-pointer" @click="toggleEdit">
             <Icon :icon="closeIcon" />
           </div>
-          <div
-            class="cursor-pointer"
-            @click="submitHandler"
-            @keyup="submitHandler"
-          >
+          <div class="cursor-pointer" @click="submitHandler">
             <Icon :icon="checkIcon" />
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { cloneDeep } from "lodash";
 import { ipRangeOptions } from "@/utils/form/options";
-import { networkDiscoveryFieldNames } from "../form/networkScan";
+import { networkDiscoveryFieldNames } from "@/Modules/HardwareAsset/utils/form/networkScan";
 
 export const getArrayOfFieldFromApi = (
   resData,

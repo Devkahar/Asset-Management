@@ -1,4 +1,4 @@
-import { generateKey } from "../form/generalFields";
+import { generateKey } from "@/utils/form/generalFields";
 
 // Harware table Data
 export const hardWareFieldsKeys = {

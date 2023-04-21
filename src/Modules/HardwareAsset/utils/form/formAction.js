@@ -1,5 +1,5 @@
-import { clientAction } from "../constants";
-import Icons from "../iconPath";
+import { clientAction } from "@/utils/constants";
+import Icons from "@/utils/iconPath";
 
 export const actions = {
   edit: {

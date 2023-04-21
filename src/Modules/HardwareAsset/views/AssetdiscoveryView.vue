@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import { assetDiscoveryField } from "@/utils/tabs/discoveryTabs";
-import { mainFieldName } from "@/utils/tabs/index";
+import { assetDiscoveryField } from "@/Modules/HardwareAsset/utils/tabs/discoveryTabs";
+import { mainFieldName } from "@/Modules/HardwareAsset/utils/tabs/index";
 import Data from "../components/Data.vue";
 export default {
   name: "AssetdiscoveryView",

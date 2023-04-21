@@ -1,6 +1,6 @@
-import { generateValidation } from "./generalFields";
-import { credentialOptions } from "./options";
-import { requiredRule } from "./rules";
+import { generateValidation } from "@/utils/form/generalFields";
+import { credentialOptions } from "@/utils/form/options";
+import { requiredRule } from "@/utils/form/rules";
 import { descriptionFiled } from "./commonField";
 
 // Credential Form

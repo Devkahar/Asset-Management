@@ -27,7 +27,7 @@ import { Error } from "@/utils/helper";
 import Link from "@/components/Link.vue";
 import Alert from "@/components/Alert.vue";
 import Logo from "@/components/Logo.vue";
-import { signupValidation } from "@/utils/form/authValidation";
+import { signupValidation } from "@/Modules/Authentication/utils/forms/authValidation";
 import { ROUTE } from "@/utils/constants";
 import { postClient } from "@/utils/http/client";
 import { message } from "ant-design-vue/lib";
