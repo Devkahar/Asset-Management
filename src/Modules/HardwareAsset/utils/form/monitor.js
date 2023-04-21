@@ -1,4 +1,4 @@
-import { capitalize, generateValidation } from "@/utils/form/generalFields";
+import { generateValidation } from "@/utils/form/generalFields";
 import {
   // dateField,
   descriptionFiled,
@@ -15,8 +15,8 @@ export const monitorFieldName = {
   // serialNumber: "serialNumber",
   // installedDate: "installedDate",
   // PNPDeviceId: "PNPDeviceId",
-  screenHeight: "screenHeight",
-  screenWidth: "screenWidth",
+  // screenHeight: "screenHeight",
+  // screenWidth: "screenWidth",
   // weekOfManufacture: "weekOfManufacture",
   // yearOfManufacture: "yearOfManufacture",
   description: "description",
@@ -42,16 +42,16 @@ export const monitorField = {
   //   placeholder: "PNP Device ID",
   //   initialValue: "",
   // },
-  [monitorFieldName.screenHeight]: {
-    placeholder: capitalize(monitorFieldName.screenHeight),
-    initialValue: "",
-    type: "number",
-  },
-  [monitorFieldName.screenWidth]: {
-    placeholder: capitalize(monitorFieldName.screenWidth),
-    initialValue: "",
-    type: "number",
-  },
+  // [monitorFieldName.screenHeight]: {
+  //   placeholder: capitalize(monitorFieldName.screenHeight),
+  //   initialValue: "",
+  //   type: "number",
+  // },
+  // [monitorFieldName.screenWidth]: {
+  //   placeholder: capitalize(monitorFieldName.screenWidth),
+  //   initialValue: "",
+  //   type: "number",
+  // },
   // [monitorFieldName.weekOfManufacture]: {
   //   placeholder: capitalize(monitorFieldName.weekOfManufacture),
   //   initialValue: "",

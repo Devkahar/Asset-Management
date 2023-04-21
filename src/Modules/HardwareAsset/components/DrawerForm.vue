@@ -1,6 +1,6 @@
 <template>
   <a-form :form="form" @submit="handleSubmit">
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-2 gap-y-1 gap-x-3">
       <div v-for="field in formInputs" :key="field.id">
         <a-form-item :label="field.placeholder">
           <a-input-password
@@ -142,7 +142,7 @@ export default {
         });
       }
       console.log(
-        "getSelectedValue ",
+        "getSelectedValue",
         this.defaultCredOptions,
         this.credentialsOptions
       );

@@ -23,18 +23,28 @@
           v-if="visible"
         >
           <template v-slot:footer="{ sumbitHandler, dummySubmit }">
-            <div class="flex justify-end">
+            <div
+              :style="{
+                position: 'absolute',
+                right: 0,
+                bottom: 0,
+                width: '100%',
+                padding: '10px 16px',
+                background: '#fff',
+                textAlign: 'right',
+                zIndex: 1,
+              }"
+              class="flex justify-end"
+            >
               <div class="mr-2" v-if="showTest">
-                <a-popover v-model="showIp" title="Ip Address" trigger="click">
+                <a-popover
+                  v-model="showIp"
+                  title="Ip Address"
+                  trigger="click"
+                  placement="bottom"
+                >
                   <a slot="content">
-                    <div class="flex items-center">
-                      <a-input v-model="ipAddress" />
-                      <div class="ml-2">
-                        <div class="cursor-pointer" @click="testConnection">
-                          <Icon :icon="checkIcon" />
-                        </div>
-                      </div>
-                    </div>
+                    <IpForm :handleSubmit="testConnection" />
                   </a>
                   <Button
                     shape="round"
@@ -75,6 +85,7 @@ import { message } from "ant-design-vue/lib";
 import { clientAction } from "@/utils/constants";
 import DrawerForm from "./DrawerForm.vue";
 import { forms } from "../utils/form/formName";
+import IpForm from "@/components/IpForm.vue";
 
 export default {
   name: "DrawerComponent",
@@ -88,7 +99,6 @@ export default {
       connectionPayload: {},
       ipAddress: "",
       showIp: false,
-      checkIcon: Icons.check,
     };
   },
   computed: {
@@ -171,13 +181,13 @@ export default {
     getTestConnecitonValues(values) {
       this.connectionPayload = values;
     },
-    async testConnection() {
+    async testConnection(data) {
       try {
         this.showIp = false;
         message.success("Testing Connection");
         const res = await postClient("credentials/testConnection", {
           ...this.connectionPayload,
-          ipAddress: this.ipAddress,
+          ipAddress: data.ipAddress,
         });
 
         if (res.data) {
@@ -194,6 +204,6 @@ export default {
       this.form = form;
     },
   },
-  components: { PageTitle, Icon, Button, DrawerForm },
+  components: { PageTitle, Icon, Button, DrawerForm, IpForm },
 };
 </script>

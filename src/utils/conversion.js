@@ -29,13 +29,13 @@ export const getSizeUnit = (value) => {
     value /= 1024;
     count++;
   }
-  if (count >= 2) {
+  if (count >= 1) {
     unit = "KB";
   }
-  if (count >= 3) {
+  if (count >= 2) {
     unit = "MB";
   }
-  if (count >= 4) {
+  if (count >= 3) {
     unit = "GB";
   }
   console.log(unit, count);

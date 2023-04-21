@@ -39,6 +39,17 @@
         <div v-if="data.length === 0" class="">
           <a-result status="warning" title="Resource Not Found"> </a-result>
         </div>
+        <a-modal
+          :title="modalTitle"
+          :visible="modalVisible"
+          :confirmLoading="modalLoading"
+          @ok="handleOk"
+          @cancel="handleCancel"
+          cancelText="No"
+          okText="Yes"
+        >
+          <p>{{ modalBody }}</p>
+        </a-modal>
       </div>
     </FetchLayout>
   </div>
@@ -67,7 +78,14 @@ export default {
   name: "DataComponent",
   inject: ["changeForm", "id"],
   data() {
-    return { parentId: "" };
+    return {
+      parentId: "",
+      modalTitle: "",
+      modalLoading: false,
+      modalVisible: false,
+      handleOk: () => {},
+      modalBody: "",
+    };
   },
   computed: {
     field() {
@@ -92,6 +110,9 @@ export default {
     },
   },
   methods: {
+    handleCancel() {
+      this.modalVisible = false;
+    },
     getEndUrl(option) {
       if (
         this.parentFieldName === mainFieldName.getAssetDiscoveryFields &&
@@ -106,19 +127,32 @@ export default {
     },
     async deleteData(url) {
       try {
-        await deleteClient(url);
-        message.success("Deleted Successfully");
-        this.fetchData();
+        this.modalLoading = true;
+        const res = await deleteClient(url);
+        if (res.data) {
+          message.success("Deleted Successfully");
+          this.handleCancel();
+          this.fetchData();
+          this.modalLoading = false;
+        } else {
+          throw Error("Cannot Delete Item");
+        }
       } catch (error) {
+        this.modalLoading = false;
+        this.handleCancel();
         message.error(error.message);
       }
     },
     async scanNetwork(id) {
       try {
+        this.modalLoading = true;
         message.success("Running Network Scan");
         await getClient(`networkScan/scan/${id}`);
+        this.modalLoading = false;
+        this.handleCancel();
         message.success("Network Scan Complete");
       } catch (error) {
+        this.handleCancel();
         message.error(error.response?.data?.message || error.message);
       }
     },
@@ -161,11 +195,17 @@ export default {
         return;
       }
       if (action.placeholder === actions.search.placeholder) {
-        this.scanNetwork(option.id);
+        this.modalTitle = "Network Scan";
+        this.modalBody = `Are You Sure you want to Scan?`;
+        this.modalVisible = true;
+        this.handleOk = () => this.scanNetwork(option.id);
         return;
       }
       if (action.actionType === actions.delete.actionType) {
-        this.deleteData(url);
+        this.modalTitle = "Delete";
+        this.modalBody = `Are You Sure you want to delete ${this.tab}?`;
+        this.modalVisible = true;
+        this.handleOk = () => this.deleteData(url);
         return;
       }
       this.changeForm(
