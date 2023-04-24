@@ -14,11 +14,11 @@ export const computerPropertyFieldName = {
   memorySize: "memorySize",
   diskSize: "diskSize",
   cpuSpeed: "cpuSpeed",
-  cpuCoreCounter: "cpuCoreCounter",
+  // cpuCoreCounter: "cpuCoreCounter",
   // partOfDomain: "partOfDomain",
   // domainName: "domainName",
   numberOfLogicalProcessors: "numberOfLogicalProcessors",
-  numberOfProcess: "numberOfProcess",
+  numberOfProcess: "numberOfProcessors",
   // pcSystemType: "pcSystemType",
   lastLoggedInUser: "lastLoggedInUser",
   // activationStatus: "activationStatus",
@@ -67,12 +67,11 @@ export const computerPropertyField = {
     type: "number",
     suffix: "Frequency",
   },
-  [computerPropertyFieldName.cpuCoreCounter]: {
-    placeholder: capitalize(computerPropertyFieldName.cpuCoreCounter),
-    initialValue: "",
-    type: "number",
-  },
-
+  // [computerPropertyFieldName.cpuCoreCounter]: {
+  //   placeholder: capitalize(computerPropertyFieldName.cpuCoreCounter),
+  //   initialValue: "",
+  //   type: "number",
+  // },
   [computerPropertyFieldName.partOfDomain]: partOfDomainField,
   [computerPropertyFieldName.domainName]: {
     placeholder: capitalize(computerPropertyFieldName.domainName),
