@@ -36,6 +36,9 @@
               }"
               class="flex justify-end"
             >
+              <div class="mr-2" v-if="showDeleteSchedule">
+                <DeleteScheduler :closeDrawer="onClose" />
+              </div>
               <div class="mr-2" v-if="showTest">
                 <a-popover
                   v-model="showIp"
@@ -86,6 +89,7 @@ import { clientAction } from "@/utils/constants";
 import DrawerForm from "./DrawerForm.vue";
 import { forms } from "../utils/form/formName";
 import IpForm from "@/components/IpForm.vue";
+import DeleteScheduler from "./DeleteScheduler.vue";
 
 export default {
   name: "DrawerComponent",
@@ -113,6 +117,12 @@ export default {
     },
     showTest() {
       return this.formName === forms.ADD_CREDENTIAL;
+    },
+    showDeleteSchedule() {
+      return (
+        this.formName === forms.SCHEDULE &&
+        this.action.placeholder === actions.edit.placeholder
+      );
     },
   },
   inject: {
@@ -144,6 +154,7 @@ export default {
   },
   methods: {
     onClose() {
+      console.log("onClose Called");
       this.form.resetFields();
       this.closeModel();
     },
@@ -204,6 +215,6 @@ export default {
       this.form = form;
     },
   },
-  components: { PageTitle, Icon, Button, DrawerForm, IpForm },
+  components: { PageTitle, Icon, Button, DrawerForm, IpForm, DeleteScheduler },
 };
 </script>

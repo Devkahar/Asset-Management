@@ -158,7 +158,7 @@ export default {
     },
     async addScheduler(id) {
       try {
-        const res = await getClient(`networkScan/${id}/addScheduler`);
+        const res = await getClient(`networkScan/${id}/scheduler`);
         const data = getArrayOfFieldFromApi(
           [res.data],
           schedulerFiled,
@@ -169,7 +169,7 @@ export default {
           data[0].fieldData,
           actions.edit,
           { payload: data[0].payload },
-          `networkScan/${id}/addScheduler/${data[0].payload.id}`,
+          `networkScan/${id}/scheduler`,
           () => {}
         );
       } catch (error) {
@@ -179,7 +179,7 @@ export default {
           schedulerFiled,
           actions.add,
           {},
-          `networkScan/${id}/addScheduler`,
+          `networkScan/${id}/scheduler`,
           () => {}
         );
       }
