@@ -3,7 +3,7 @@ It helps to discover IT assets and manage them in big IT organizations.
 
 
 ## Add Credentials
-https://raw.githubusercontent.com/Devkahar/Asset-Management/main/assets/AddCredential%26Ping.mov)
+https://raw.githubusercontent.com/Devkahar/Asset-Management/main/assets/AddCredential%26Ping.mov
 
 ## Scan Entire Organization Network
 https://github.com/Devkahar/Asset-Management/assets/53462977/5feb10b3-7efc-4b15-83a7-c590f6bb3ae3
