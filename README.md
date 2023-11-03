@@ -1,4 +1,5 @@
-# asset-manager
+# Asset Discovery And Manager
+Helps to discover IT assets and manage them in big IT organization.
 
 ## Project setup
 ```
