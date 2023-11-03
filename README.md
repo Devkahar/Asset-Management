@@ -1,5 +1,17 @@
 # Asset Discovery And Manager
-Helps to discover IT assets and manage them in big IT organization.
+It helps to discover IT assets and manage them in big IT organizations.
+
+
+## Scan Entire Organization Network
+https://github.com/Devkahar/Asset-Management/assets/53462977/5feb10b3-7efc-4b15-83a7-c590f6bb3ae3
+
+## Running Network Scan
+https://github.com/Devkahar/Asset-Management/assets/53462977/23cd47ae-9695-4297-bed0-04c31346d3b4
+
+## Adding Scheduler for scanning
+https://github.com/Devkahar/Asset-Management/assets/53462977/7e64f3db-cfdc-4562-80d1-8bfd9f0a4b66
+
+
 
 ## Project setup
 ```
